@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getQuizById, calculateResult } from '@/data/quizzes';
@@ -10,14 +10,15 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ChevronRight, Brain, Check, ArrowRight } from 'lucide-react';
 
 interface QuizPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default function QuizPage({ params }: QuizPageProps) {
   const router = useRouter();
-  const quiz = getQuizById(params.id);
+  const resolvedParams = use(params);
+  const quiz = getQuizById(resolvedParams.id);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isCompleted, setIsCompleted] = useState(false);
@@ -34,7 +35,7 @@ export default function QuizPage({ params }: QuizPageProps) {
 
   const currentQuestion = quiz.questions[currentQuestionIndex];
   const totalQuestions = quiz.questions.length;
-  const progress = ((currentQuestionIndex + 1) / totalQuestions;
+  const progress = (currentQuestionIndex + 1) / totalQuestions;
   const selectedAnswer = answers[currentQuestion.id];
 
   const handleAnswerSelect = (optionId: string) => {
@@ -98,7 +99,7 @@ export default function QuizPage({ params }: QuizPageProps) {
 
         <div className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full mb-8 overflow-hidden">
           <div 
-            className={`h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500 ease-out rounded-full"
+            className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500 ease-out rounded-full"
             style={{ width: `${progress * 100}%` }}
           ></div>
         </div>

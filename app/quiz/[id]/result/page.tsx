@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { getQuizById } from '@/data/quizzes';
@@ -11,16 +11,17 @@ import { BlurFade } from '@/components/ui/blur-fade';
 import { ArrowLeft, Brain, Sparkles, Share2, RotateCcw, Home } from 'lucide-react';
 
 interface ResultPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default function ResultPage({ params }: ResultPageProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const resultId = searchParams.get('result');
-  const quiz = getQuizById(params.id);
+  const resolvedParams = use(params);
+  const quiz = getQuizById(resolvedParams.id);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
