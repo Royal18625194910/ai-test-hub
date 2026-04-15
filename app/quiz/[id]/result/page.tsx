@@ -87,7 +87,7 @@ export default function ResultPage({ params }: ResultPageProps) {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
               <ArrowLeft className="w-5 h-5" />
-              <span className="font-medium">返回首页</span>
+              <span className="font-medium">测试题集合 Hub</span>
             </Link>
             <div className="flex items-center gap-2">
               {isLoaded && isSignedIn && user ? (

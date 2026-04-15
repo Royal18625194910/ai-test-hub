@@ -21,7 +21,6 @@ export default function QuizPage({ params }: QuizPageProps) {
   const quiz = getQuizById(resolvedParams.id);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
-  const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     if (!quiz) {
@@ -48,8 +47,6 @@ export default function QuizPage({ params }: QuizPageProps) {
   const handleNext = () => {
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
-    } else {
-      setIsCompleted(true);
     }
   };
 
@@ -73,12 +70,10 @@ export default function QuizPage({ params }: QuizPageProps) {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
               <ArrowLeft className="w-5 h-5" />
-              <span className="font-medium">返回首页</span>
+              <span className="font-medium">测试题集合 Hub</span>
             </Link>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                <Brain className="w-4 h-4 text-white" />
-              </div>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+              <Brain className="w-4 h-4 text-white" />
             </div>
           </div>
         </div>
@@ -93,7 +88,7 @@ export default function QuizPage({ params }: QuizPageProps) {
             {quiz.title}
           </h1>
           <p className="text-slate-600 dark:text-slate-400">
-            第 {currentQuestionIndex + 1} / {totalQuestions} 题
+            {currentQuestionIndex + 1} / {totalQuestions}
           </p>
         </div>
 
@@ -107,7 +102,7 @@ export default function QuizPage({ params }: QuizPageProps) {
         <Card className="border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg">
           <CardHeader className="pb-4">
             <CardTitle className="text-xl md:text-2xl text-slate-900 dark:text-white leading-relaxed">
-            {currentQuestion.text}
+              {currentQuestion.text}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -148,18 +143,18 @@ export default function QuizPage({ params }: QuizPageProps) {
           <div className="flex items-center gap-2">
             {quiz.questions.map((_, index) => (
               <button
-              key={index}
-              onClick={() => setCurrentQuestionIndex(index)}
-              className={`w-8 h-8 rounded-full text-sm font-medium transition-all duration-200
-                ${index === currentQuestionIndex 
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white scale-110' 
-                  : answers[quiz.questions[index].id] 
-                    ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400' 
-                    : 'bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
-                }`}
-            >
-              {index + 1}
-            </button>
+                key={index}
+                onClick={() => setCurrentQuestionIndex(index)}
+                className={`w-8 h-8 rounded-full text-sm font-medium transition-all duration-200
+                  ${index === currentQuestionIndex 
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white scale-110' 
+                    : answers[quiz.questions[index].id] 
+                      ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400' 
+                      : 'bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                  }`}
+              >
+                {index + 1}
+              </button>
             ))}
           </div>
 
