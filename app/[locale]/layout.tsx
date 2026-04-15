@@ -1,10 +1,13 @@
-import { NextIntlClientProvider, hasLocale } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { routing } from '@/src/i18n/routing';
 import { notFound } from 'next/navigation';
 import '../globals.css';
+import zhCN from '@/src/i18n/zh-CN.json';
+import zhTW from '@/src/i18n/zh-TW.json';
+import en from '@/src/i18n/en.json';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -15,6 +18,12 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
 });
+
+const messages: Record<string, any> = {
+  'zh-CN': zhCN,
+  'zh-TW': zhTW,
+  'en': en,
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -52,16 +61,15 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   
-  if (!hasLocale(routing.locales, locale)) {
+  if (!routing.locales.includes(locale as any)) {
     notFound();
   }
 
   setRequestLocale(locale);
-  const messages = await getMessages();
 
   return (
     <ClerkProvider>
-      <NextIntlClientProvider messages={messages}>
+      <NextIntlClientProvider messages={messages[locale]}>
         <html
           lang={locale}
           className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
