@@ -1,0 +1,211 @@
+{
+  "common": {
+    "appName": "Quiz Hub",
+    "tagline": "Discover Your True Self",
+    "featured": "Featured Quizzes",
+    "startQuiz": "Start Quiz",
+    "subscribe": "Subscribe for Updates",
+    "comingSoon": "More Quizzes Coming Soon",
+    "comingSoonDesc": "We are continuously developing more interesting psychological tests, including EQ tests, career aptitude tests, relationship tests, and more. Stay tuned!",
+    "footer": "© 2024 Quiz Hub. For entertainment purposes only.",
+    "forEntertainment": "For entertainment purposes only",
+    "previous": "Previous",
+    "next": "Next",
+    "viewResult": "View Result",
+    "signIn": "Sign In",
+    "testCompleted": "Test Completed",
+    "yourResult": "Your Result",
+    "resultLocked": "Result Locked",
+    "loginToViewResult": "Sign in to view your complete test results and understand your personality traits and behavioral patterns.",
+    "unlockResult": "Unlock to View Result",
+    "loginToUnlock": "Sign In to Unlock",
+    "loginHint": "Sign in with email verification code, no password needed. First time users are automatically registered.",
+    "retakeQuiz": "Retake Quiz",
+    "browseMore": "Browse More Quizzes",
+    "shareResult": "Share Result",
+    "thinkingStyle": "Thinking Style",
+    "creativePotential": "Creative Potential",
+    "socialSkills": "Social Skills",
+    "actionAbility": "Action Ability"
+  },
+  "hero": {
+    "badge": "Discover Your True Self",
+    "title": "Explore Your",
+    "highlight": "Unique Personality",
+    "description": "Through carefully designed psychological tests, gain deep insights into your personality traits, behavioral patterns, and potential strengths. Start your journey of self-discovery today!"
+  },
+  "sections": {
+    "popularQuizzes": "Popular Quizzes",
+    "features": "Why Choose Us",
+    "testimonials": "What Users Say",
+    "cta": "Start Your Journey"
+  },
+  "difficulty": {
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard"
+  },
+  "questions": {
+    "count": "questions"
+  },
+  "features": {
+    "accuracy": {
+      "title": "Scientific & Accurate",
+      "description": "Test designs based on psychological research ensure reliable and valid results."
+    },
+    "privacy": {
+      "title": "Privacy Protected",
+      "description": "All test data is strictly confidential. Your privacy is our top priority."
+    },
+    "insights": {
+      "title": "Deep Insights",
+      "description": "Get detailed personality analysis reports to understand your strengths and growth areas."
+    },
+    "free": {
+      "title": "Completely Free",
+      "description": "All tests are completely free. Get full reports without any payment."
+    }
+  },
+  "testimonials": {
+    "user1": {
+      "name": "Alex Chen",
+      "role": "Product Manager",
+      "content": "This test gave me a whole new understanding of myself. The results are incredibly accurate! I recommend it to anyone who wants to know themselves better."
+    },
+    "user2": {
+      "name": "Sarah Wang",
+      "role": "Designer",
+      "content": "The interface is beautifully designed, and the testing process is fun. The result analysis showed me my strengths and areas for improvement."
+    },
+    "user3": {
+      "name": "Mike Zhang",
+      "role": "Engineer",
+      "content": "As a rational person, I was skeptical about psychological tests. But the results of this test really surprised me - it's so accurate!"
+    }
+  },
+  "cta": {
+    "title": "Ready to Discover Your True Self?",
+    "description": "Start your first psychological test now and discover the unique personality hidden deep within you.",
+    "button": "Start Quiz Now"
+  },
+  "language": {
+    "zh-CN": "简体中文",
+    "zh-TW": "繁體中文",
+    "en": "English"
+  },
+  "quizzes": {
+    "personality-type": {
+      "title": "Your Personality Type Test",
+      "description": "Discover your unique personality traits and behavioral patterns through 10 interesting questions.",
+      "category": "Personality Test",
+      "questions": [
+        {
+          "text": "At social gatherings, you usually:",
+          "options": [
+            { "text": "Actively talk to strangers and become the center of attention" },
+            { "text": "Chat with a few familiar friends" },
+            { "text": "Find a quiet corner and observe your surroundings" }
+          ]
+        },
+        {
+          "text": "You focus more on:",
+          "options": [
+            { "text": "Concrete facts and details" },
+            { "text": "Overall patterns and possibilities" },
+            { "text": "Both equally" }
+          ]
+        },
+        {
+          "text": "When making decisions, you rely more on:",
+          "options": [
+            { "text": "Logical analysis and objective standards" },
+            { "text": "Personal values and others' feelings" },
+            { "text": "A combination of both" }
+          ]
+        },
+        {
+          "text": "When it comes to plans and arrangements, you tend to:",
+          "options": [
+            { "text": "Plan ahead and follow the plan" },
+            { "text": "Stay flexible and adapt to changes" },
+            { "text": "Have a rough plan but allow adjustments" }
+          ]
+        },
+        {
+          "text": "You prefer a work environment that is:",
+          "options": [
+            { "text": "Fast-paced and full of changes" },
+            { "text": "Stable with clear rules" },
+            { "text": "Creative and autonomous" }
+          ]
+        },
+        {
+          "text": "When someone shares their troubles with you, you usually:",
+          "options": [
+            { "text": "Offer practical solutions" },
+            { "text": "First empathize and understand their feelings" },
+            { "text": "Share similar experiences of your own" }
+          ]
+        },
+        {
+          "text": "You believe more in:",
+          "options": [
+            { "text": "Experience and proven methods" },
+            { "text": "Intuition and future possibilities" },
+            { "text": "Data and objective analysis" }
+          ]
+        },
+        {
+          "text": "In team projects, you usually play the role of:",
+          "options": [
+            { "text": "Organizer - assigning tasks and ensuring progress" },
+            { "text": "Creator - providing new ideas and directions" },
+            { "text": "Coordinator - ensuring team harmony" }
+          ]
+        },
+        {
+          "text": "How do you handle stress?",
+          "options": [
+            { "text": "Talk with friends or family" },
+            { "text": "Spend time alone to organize your thoughts" },
+            { "text": "Release through activities or exercise" }
+          ]
+        },
+        {
+          "text": "You value more:",
+          "options": [
+            { "text": "Achievement and goal completion" },
+            { "text": "Harmony and relationships" },
+            { "text": "Freedom and exploring new things" }
+          ]
+        }
+      ],
+      "results": {
+        "analyst": {
+          "title": "The Analytical Thinker (INTJ/INTP)",
+          "description": "You are an independent, rational, and insightful thinker. You excel at strategic planning and systems analysis, and enjoy deeply understanding complex concepts. At work, you pursue efficiency and innovation, and can see patterns and possibilities that others miss. Your strengths lie in logical thinking and long-term vision, but you may sometimes appear too rational or insufficiently attentive to others' feelings."
+        },
+        "diplomat": {
+          "title": "The Idealist (INFJ/INFP)",
+          "description": "You are an empathetic, creative, and idealistic person. You deeply understand others' emotions and needs, and excel at building deep relationships. You pursue meaning and purpose, and enjoy helping others grow and develop. Your strengths lie in intuition and empathy, but you may sometimes be too idealistic or easily hurt."
+        },
+        "sentinel": {
+          "title": "The Guardian (ISTJ/ISFJ)",
+          "description": "You are a reliable, practical, and responsible person. You value tradition and order, and excel at establishing stable systems and processes. You are the backbone of any team, always completing tasks on time and ensuring quality. Your strengths lie in reliability and focus, but you may sometimes be too conservative or resistant to change."
+        },
+        "explorer": {
+          "title": "The Explorer (ISTP/ISFP)",
+          "description": "You are a flexible, adaptable, and experience-oriented person. You live in the present, and excel at handling unexpected situations and practical problems. You enjoy hands-on practice and have keen observation of your surroundings. Your strengths lie in flexibility and pragmatism, but you may sometimes be too impulsive or lack long-term planning."
+        },
+        "executive": {
+          "title": "The Executive (ESTJ/ENTJ)",
+          "description": "You are a decisive, confident, and organized leader. You excel at making plans, assigning tasks, and ensuring goals are met. You enjoy challenges and competition, and can stay calm under pressure. Your strengths lie in decision-making and execution, but you may sometimes be too assertive or insufficiently considerate of others' feelings."
+        },
+        "campaigner": {
+          "title": "The Campaigner (ENFJ/ENFP)",
+          "description": "You are an enthusiastic, charismatic, and inspiring person. You enjoy social activities and can easily connect with all kinds of people. You are full of energy and creativity, and always see the positive side of things. Your strengths lie in social skills and charisma, but you may sometimes spread yourself too thin or have difficulty focusing."
+        }
+      }
+    }
+  }
+}
