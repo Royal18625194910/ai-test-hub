@@ -19,6 +19,7 @@ export default function SignInPage() {
           path="/sign-in"
           routing="path"
           signUpUrl="/sign-in"
+          forceRedirectUrl="/"
           appearance={{
             elements: {
               rootBox: 'w-full',
