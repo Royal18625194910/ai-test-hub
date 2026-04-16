@@ -5,11 +5,15 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { BlurFade } from '@/components/ui/blur-fade';
-import { ChevronRight, Brain, Sparkles, Shield, Lock, Lightbulb, Gift, Quote, Star, ArrowRight } from 'lucide-react';
+import { ChevronRight, Brain, Sparkles, Shield, Lock, Lightbulb, Gift, Quote, Star, ArrowRight, LogIn, User } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+import { useAuth, useUser } from '@clerk/nextjs';
 
 export default function Home() {
+  const { isSignedIn, isLoaded } = useAuth();
+  const { user } = useUser();
+
   const features = [
     { icon: <Shield className="w-6 h-6" />, key: 'accuracy', color: 'from-blue-500 to-cyan-500', title: '科学准确', description: '基于心理学研究的测试设计，确保结果的可靠性和有效性。' },
     { icon: <Lock className="w-6 h-6" />, key: 'privacy', color: 'from-green-500 to-emerald-500', title: '隐私保护', description: '所有测试数据严格保密，你的隐私是我们最关心的。' },
@@ -40,6 +44,21 @@ export default function Home() {
               <Sparkles className="w-3 h-3" />
               精选测试
             </Badge>
+            {isLoaded && isSignedIn && user ? (
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                  <User className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-sm text-slate-600 dark:text-slate-400 hidden sm:block">
+                  {user.emailAddresses[0]?.emailAddress || user.username}
+                </span>
+              </div>
+            ) : (
+              <Link href="/sign-in" className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                <LogIn className="w-5 h-5" />
+                <span className="font-medium hidden sm:block">登录</span>
+              </Link>
+            )}
           </div>
         </div>
       </header>

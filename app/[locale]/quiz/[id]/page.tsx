@@ -59,10 +59,25 @@ export default function QuizPage({ params }: QuizPageProps) {
   };
 
   const handleAnswerSelect = (optionId: string) => {
-    setAnswers(prev => ({
-      ...prev,
+    const newAnswers = {
+      ...answers,
       [currentQuestion.id]: optionId
-    }));
+    };
+    setAnswers(newAnswers);
+    
+    if (currentQuestionIndex < totalQuestions - 1) {
+      setTimeout(() => {
+        setCurrentQuestionIndex(prev => prev + 1);
+      }, 300);
+    } else {
+      const allAnswered = Object.keys(newAnswers).length === totalQuestions;
+      if (allAnswered) {
+        setTimeout(() => {
+          const result = calculateResult(newAnswers, quiz);
+          router.push(`/quiz/${quiz.id}/result?result=${result.id}`);
+        }, 300);
+      }
+    }
   };
 
   const handleNext = () => {
