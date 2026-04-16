@@ -8,14 +8,12 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { BlurFade } from '@/components/ui/blur-fade';
 import { LanguageSwitcher } from '@/components/language-switcher';
-import { ChevronRight, Brain, Sparkles, Shield, Lock, Lightbulb, Gift, Quote, Star, ArrowRight, LogIn, User } from 'lucide-react';
+import { ChevronRight, Brain, Sparkles, Shield, Lock, Lightbulb, Gift, Quote, Star, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useAuth, useUser } from '@clerk/nextjs';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 
 export default function Home() {
   const t = useTranslations();
-  const { isSignedIn, isLoaded } = useAuth();
-  const { user } = useUser();
 
   const features = [
     { icon: <Shield className="w-6 h-6" />, key: 'accuracy', color: 'from-blue-500 to-cyan-500' },
@@ -47,21 +45,22 @@ export default function Home() {
               <Sparkles className="w-3 h-3" />
               {t('common.featured')}
             </Badge>
-            {isLoaded && isSignedIn && user ? (
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                  <User className="w-4 h-4 text-white" />
-                </div>
-                <span className="text-sm text-slate-600 dark:text-slate-400 hidden sm:block">
-                  {user.emailAddresses[0]?.emailAddress || user.username}
-                </span>
-              </div>
-            ) : (
-              <Link href="/sign-in" className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
-                <LogIn className="w-5 h-5" />
-                <span className="font-medium hidden sm:block">{t('common.signIn')}</span>
-              </Link>
-            )}
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                  <span className="font-medium">{t('common.signIn')}</span>
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton 
+                appearance={{
+                  elements: {
+                    avatarBox: 'w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500',
+                  }
+                }}
+              />
+            </SignedIn>
             <LanguageSwitcher />
           </div>
         </div>
