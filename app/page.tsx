@@ -8,9 +8,10 @@ import { BlurFade } from '@/components/ui/blur-fade';
 import { ChevronRight, Brain, Sparkles, Shield, Lock, Lightbulb, Gift, Quote, Star, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+import { useAuth, SignInButton, UserButton, ClerkLoaded } from '@clerk/nextjs';
 
 export default function Home() {
+  const { isSignedIn } = useAuth();
 
   const features = [
     { icon: <Shield className="w-6 h-6" />, key: 'accuracy', color: 'from-blue-500 to-cyan-500', title: '科学准确', description: '基于心理学研究的测试设计，确保结果的可靠性和有效性。' },
@@ -42,22 +43,23 @@ export default function Home() {
               <Sparkles className="w-3 h-3" />
               精选测试
             </Badge>
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
-                  <span className="font-medium">登录</span>
-                </button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton 
-                appearance={{
-                  elements: {
-                    avatarBox: 'w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500',
-                  }
-                }}
-              />
-            </SignedIn>
+            <ClerkLoaded>
+              {!isSignedIn ? (
+                <SignInButton mode="modal">
+                  <button className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <span className="font-medium">登录</span>
+                  </button>
+                </SignInButton>
+              ) : (
+                <UserButton 
+                  appearance={{
+                    elements: {
+                      avatarBox: 'w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500',
+                    }
+                  }}
+                />
+              )}
+            </ClerkLoaded>
           </div>
         </div>
       </header>
