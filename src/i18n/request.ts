@@ -1,6 +1,15 @@
 import { notFound } from 'next/navigation';
 import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
+import zhCN from './zh-CN.json';
+import zhTW from './zh-TW.json';
+import en from './en.json';
+
+const messages: Record<string, any> = {
+  'zh-CN': zhCN,
+  'zh-TW': zhTW,
+  'en': en,
+};
 
 export default getRequestConfig(async ({ locale }) => {
   if (!routing.locales.includes(locale as any)) {
@@ -8,6 +17,6 @@ export default getRequestConfig(async ({ locale }) => {
   }
 
   return {
-    messages: (await import(`./${locale}.json`)).default
+    messages: messages[locale]
   };
 });
