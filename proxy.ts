@@ -1,13 +1,18 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import createIntlMiddleware from 'next-intl/middleware';
+import { routing } from '@/src/i18n/routing';
 
 const isProtectedRoute = createRouteMatcher([
-  '/quiz/(.*)/result',
+  '/(.*)/quiz/(.*)/result',
 ]);
+
+const intlMiddleware = createIntlMiddleware(routing);
 
 export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
     await auth.protect();
   }
+  return intlMiddleware(req);
 });
 
 export const config = {
