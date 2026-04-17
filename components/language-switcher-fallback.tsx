@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useTranslationFallback } from '@/lib/hooks';
+import { routing } from '@/src/i18n/routing';
 import { Globe, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -10,6 +11,8 @@ const languages = [
   { code: 'zh-TW', name: '繁體中文', flag: '🇹🇼' },
   { code: 'en', name: 'English', flag: '🇺🇸' },
 ];
+
+const LOCALE_STORAGE_KEY = 'ai-test-hub-locale';
 
 export function LanguageSwitcherFallback() {
   const { locale, saveLocale, isLoaded, t } = useTranslationFallback();
@@ -29,9 +32,28 @@ export function LanguageSwitcherFallback() {
   }, []);
 
   const handleLanguageChange = (newLocale: string) => {
-    saveLocale(newLocale);
+    try {
+      localStorage.setItem(LOCALE_STORAGE_KEY, newLocale);
+      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+    } catch (e) {
+      console.warn('Failed to save locale:', e);
+    }
     setIsOpen(false);
-    window.location.reload();
+    
+    if (typeof window !== 'undefined') {
+      const currentPath = window.location.pathname;
+      const segments = currentPath.split('/');
+      
+      if (segments.length > 1 && routing.locales.includes(segments[1] as any)) {
+        segments[1] = newLocale;
+      } else {
+        segments.splice(1, 0, newLocale);
+      }
+      
+      const newPath = segments.join('/') || `/${newLocale}`;
+      const searchParams = window.location.search;
+      window.location.href = newPath + searchParams;
+    }
   };
 
   if (!isLoaded) {
@@ -47,7 +69,7 @@ export function LanguageSwitcherFallback() {
       <Button
         variant="ghost"
         size="sm"
-        className="flex items-center gap-2 px-3 hover:bg-slate-100 dark:hover:bg-slate-800"
+        className="flex items-center gap-2 px-3 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Globe className="w-4 h-4" />
@@ -61,6 +83,7 @@ export function LanguageSwitcherFallback() {
           {languages.map((lang) => (
             <button
               key={lang.code}
+              type="button"
               className={`w-full px-4 py-3 text-left flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors ${
                 locale === lang.code 
                   ? 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400' 
