@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useLocale } from 'next-intl';
-import { useRouter, usePathname, routing } from '@/src/i18n/routing';
+import { usePathname, routing } from '@/src/i18n/routing';
 import { Globe, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -19,11 +19,8 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const currentLang = languages.find(lang => lang.code === locale) || languages[0];
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -69,16 +66,6 @@ export function LanguageSwitcher() {
       window.location.href = newPath + searchParams;
     }
   };
-
-  const currentLang = languages.find(lang => lang.code === locale) || languages[0];
-
-  if (!mounted) {
-    return (
-      <div className="flex items-center gap-2 px-3 py-2">
-        <Globe className="w-4 h-4 text-slate-400" />
-      </div>
-    );
-  }
 
   return (
     <div className="relative" ref={dropdownRef}>
