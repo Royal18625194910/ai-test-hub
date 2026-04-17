@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { cookies } from "next/headers";
+import { routing } from "@/src/i18n/routing";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,15 +27,35 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  let locale = routing.defaultLocale;
+  
+  const storedLocale = cookieStore.get('NEXT_LOCALE')?.value;
+  if (storedLocale && routing.locales.includes(storedLocale as any)) {
+    locale = storedLocale;
+  } else {
+    const acceptLanguage = cookieStore.get('Accept-Language')?.value || '';
+    const browserLocale = acceptLanguage.split(',')[0]?.toLowerCase();
+    if (browserLocale) {
+      if (browserLocale.startsWith('zh-tw') || browserLocale.startsWith('zh-hk')) {
+        locale = 'zh-TW';
+      } else if (browserLocale.startsWith('zh')) {
+        locale = 'zh-CN';
+      } else if (browserLocale.startsWith('en')) {
+        locale = 'en';
+      }
+    }
+  }
+
   return (
     <ClerkProvider>
       <html
-        lang="zh-CN"
+        lang={locale}
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
         <body className="min-h-full flex flex-col">{children}</body>
