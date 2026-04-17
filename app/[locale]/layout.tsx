@@ -71,7 +71,10 @@ export default async function LocaleLayout({
 
   return (
     <ClerkProvider>
-      <NextIntlClientProvider messages={messages[safeLocale]}>
+      <NextIntlClientProvider 
+        locale={safeLocale}
+        messages={messages[safeLocale]}
+      >
         <html
           lang={safeLocale}
           className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
