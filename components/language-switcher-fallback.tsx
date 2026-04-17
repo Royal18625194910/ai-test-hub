@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from '@/src/i18n/routing';
-import { useLanguageStorage } from '@/lib/hooks';
+import { useTranslationFallback } from '@/lib/hooks';
 import { Globe, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -13,11 +11,8 @@ const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
 ];
 
-export function LanguageSwitcher() {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
-  const { saveLocale } = useLanguageStorage();
+export function LanguageSwitcherFallback() {
+  const { locale, saveLocale, isLoaded, t } = useTranslationFallback();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -35,9 +30,17 @@ export function LanguageSwitcher() {
 
   const handleLanguageChange = (newLocale: string) => {
     saveLocale(newLocale);
-    router.replace(pathname, { locale: newLocale });
     setIsOpen(false);
+    window.location.reload();
   };
+
+  if (!isLoaded) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-2">
+        <Globe className="w-4 h-4 text-slate-400" />
+      </div>
+    );
+  }
 
   return (
     <div className="relative" ref={dropdownRef}>

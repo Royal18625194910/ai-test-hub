@@ -12,11 +12,15 @@ const messages: Record<string, any> = {
 };
 
 export default getRequestConfig(async ({ locale }) => {
-  if (!routing.locales.includes(locale as any)) {
-    notFound();
+  if (!locale || !routing.locales.includes(locale as any)) {
+    return {
+      locale: routing.defaultLocale,
+      messages: messages[routing.defaultLocale]
+    };
   }
 
   return {
+    locale,
     messages: messages[locale]
   };
 });
