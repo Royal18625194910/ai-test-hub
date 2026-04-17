@@ -7,17 +7,7 @@ import { Brain, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default function SignInPage() {
-  const { t, isLoaded } = useTranslationFallback();
-
-  if (!isLoaded) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center">
-        <div className="animate-pulse">
-          <Brain className="w-12 h-12 text-purple-500" />
-        </div>
-      </div>
-    );
-  }
+  const { t } = useTranslationFallback();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">

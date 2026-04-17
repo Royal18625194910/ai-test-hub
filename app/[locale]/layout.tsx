@@ -1,13 +1,8 @@
-import { NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { ClerkProvider } from '@clerk/nextjs';
 import { routing } from '@/src/i18n/routing';
 import { notFound } from 'next/navigation';
 import '../globals.css';
-import zhCN from '@/src/i18n/zh-CN.json';
-import zhTW from '@/src/i18n/zh-TW.json';
-import en from '@/src/i18n/en.json';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -18,12 +13,6 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
 });
-
-const messages: Record<string, any> = {
-  'zh-CN': zhCN,
-  'zh-TW': zhTW,
-  'en': en,
-};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -70,18 +59,8 @@ export default async function LocaleLayout({
   setRequestLocale(safeLocale);
 
   return (
-    <ClerkProvider>
-      <NextIntlClientProvider 
-        locale={safeLocale}
-        messages={messages[safeLocale]}
-      >
-        <html
-          lang={safeLocale}
-          className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-        >
-          <body className="min-h-full flex flex-col">{children}</body>
-        </html>
-      </NextIntlClientProvider>
-    </ClerkProvider>
+    <div className={`${geistSans.variable} ${geistMono.variable}`}>
+      {children}
+    </div>
   );
 }
