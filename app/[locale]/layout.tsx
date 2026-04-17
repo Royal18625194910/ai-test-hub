@@ -29,8 +29,9 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale?: string }> }) {
   const { locale } = await params;
+  const safeLocale = locale || routing.defaultLocale;
   
   const titles: Record<string, string> = {
     'zh-CN': '测试题集合 Hub - 发现真实的自己',
@@ -45,8 +46,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   return {
-    title: titles[locale] || titles['zh-CN'],
-    description: descriptions[locale] || descriptions['zh-CN'],
+    title: titles[safeLocale] || titles['zh-CN'],
+    description: descriptions[safeLocale] || descriptions['zh-CN'],
     keywords: ['心理测试', '性格测试', '趣味测试', '自我探索', 'MBTI', '人格测试'],
     authors: [{ name: '测试题集合 Hub' }],
   };
@@ -57,21 +58,22 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale?: string }>;
 }) {
   const { locale } = await params;
+  const safeLocale = locale || routing.defaultLocale;
   
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(safeLocale as any)) {
     notFound();
   }
 
-  setRequestLocale(locale);
+  setRequestLocale(safeLocale);
 
   return (
     <ClerkProvider>
-      <NextIntlClientProvider messages={messages[locale]}>
+      <NextIntlClientProvider messages={messages[safeLocale]}>
         <html
-          lang={locale}
+          lang={safeLocale}
           className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
         >
           <body className="min-h-full flex flex-col">{children}</body>
