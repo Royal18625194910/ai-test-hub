@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from '@/src/i18n/routing';
-import { useLanguageStorage } from '@/lib/hooks';
+import { useRouter, usePathname, routing } from '@/src/i18n/routing';
 import { Globe, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -13,15 +12,18 @@ const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
 ];
 
+const LOCALE_STORAGE_KEY = 'ai-test-hub-locale';
+
 export function LanguageSwitcher() {
   const locale = useLocale();
-  const router = useRouter();
   const pathname = usePathname();
-  const { saveLocale } = useLanguageStorage();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
 
-  const currentLang = languages.find(lang => lang.code === locale) || languages[0];
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -33,18 +35,57 @@ export function LanguageSwitcher() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const saveLocale = useCallback((newLocale: string) => {
+    try {
+      if (routing.locales.includes(newLocale as any)) {
+        localStorage.setItem(LOCALE_STORAGE_KEY, newLocale);
+        try {
+          document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+        } catch (e) {
+          console.warn('Failed to set locale cookie:', e);
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to save locale to localStorage:', e);
+    }
+  }, []);
+
   const handleLanguageChange = (newLocale: string) => {
     saveLocale(newLocale);
-    router.replace(pathname, { locale: newLocale });
     setIsOpen(false);
+    
+    if (typeof window !== 'undefined') {
+      const currentPath = window.location.pathname;
+      const segments = currentPath.split('/');
+      
+      if (segments.length > 1 && routing.locales.includes(segments[1] as any)) {
+        segments[1] = newLocale;
+      } else {
+        segments.splice(1, 0, newLocale);
+      }
+      
+      const newPath = segments.join('/') || `/${newLocale}`;
+      const searchParams = window.location.search;
+      window.location.href = newPath + searchParams;
+    }
   };
+
+  const currentLang = languages.find(lang => lang.code === locale) || languages[0];
+
+  if (!mounted) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-2">
+        <Globe className="w-4 h-4 text-slate-400" />
+      </div>
+    );
+  }
 
   return (
     <div className="relative" ref={dropdownRef}>
       <Button
         variant="ghost"
         size="sm"
-        className="flex items-center gap-2 px-3 hover:bg-slate-100 dark:hover:bg-slate-800"
+        className="flex items-center gap-2 px-3 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Globe className="w-4 h-4" />
@@ -58,6 +99,7 @@ export function LanguageSwitcher() {
           {languages.map((lang) => (
             <button
               key={lang.code}
+              type="button"
               className={`w-full px-4 py-3 text-left flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors ${
                 locale === lang.code 
                   ? 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400' 
