@@ -1,9 +1,18 @@
-import { setRequestLocale, getMessages } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { routing } from '@/src/i18n/routing';
 import { notFound } from 'next/navigation';
+import zhCN from '@/src/i18n/zh-CN.json';
+import zhTW from '@/src/i18n/zh-TW.json';
+import en from '@/src/i18n/en.json';
 import '../globals.css';
+
+const messages: Record<string, any> = {
+  'zh-CN': zhCN,
+  'zh-TW': zhTW,
+  'en': en,
+};
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -58,11 +67,11 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(safeLocale);
-  const messages = await getMessages();
+  const localeMessages = messages[safeLocale] || messages[routing.defaultLocale];
 
   return (
     <div className={`${geistSans.variable} ${geistMono.variable}`}>
-      <NextIntlClientProvider messages={messages} locale={safeLocale}>
+      <NextIntlClientProvider messages={localeMessages} locale={safeLocale}>
         {children}
       </NextIntlClientProvider>
     </div>
