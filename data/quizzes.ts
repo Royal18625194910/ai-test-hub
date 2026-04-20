@@ -39,7 +39,7 @@ export const quizzes: Quiz[] = [
     category: '性格测试',
     difficulty: 'easy',
     icon: '🧠',
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-amber-500 to-orange-500',
     questions: [
       {
         id: 1,
