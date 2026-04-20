@@ -420,24 +420,7 @@ export default function Home() {
           </section>
         </BlurFade>
 
-        <BlurFade delay={1.1} inView>
-          <section className="text-center mb-16">
-            <StickerCard delay={1.1}>
-              <div className="bg-gradient-to-r from-amber-100/50 to-orange-50/50 dark:from-stone-800/50 dark:to-amber-950/50 p-8 md:p-12">
-                <h3 className="text-2xl md:text-3xl font-black text-stone-900 dark:text-stone-100 mb-4">
-                  {t('common.comingSoon')}
-                </h3>
-                <p className="text-stone-600 dark:text-stone-400 mb-6 max-w-xl mx-auto leading-relaxed">
-                  {t('common.comingSoonDesc')}
-                </p>
-                <Button variant="outline" className="gap-2 border-2 border-stone-900 dark:border-stone-600 text-stone-900 dark:text-stone-100 hover:bg-orange-100 dark:hover:bg-orange-900/20 font-bold rounded-xl shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all">
-                  <Sparkles className="w-4 h-4" />
-                  {t('common.subscribe')}
-                </Button>
-              </div>
-            </StickerCard>
-          </section>
-        </BlurFade>
+
       </main>
 
       <footer className="mt-16 border-t-2 border-stone-900 dark:border-stone-600 bg-white dark:bg-stone-900">
