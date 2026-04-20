@@ -17,10 +17,10 @@ export default function Home() {
   const { isSignedIn } = useAuth();
 
   const features = [
-    { icon: <Shield className="w-6 h-6" />, key: 'accuracy', color: 'from-blue-500 to-cyan-500' },
-    { icon: <Lock className="w-6 h-6" />, key: 'privacy', color: 'from-green-500 to-emerald-500' },
-    { icon: <Lightbulb className="w-6 h-6" />, key: 'insights', color: 'from-amber-500 to-orange-500' },
-    { icon: <Gift className="w-6 h-6" />, key: 'free', color: 'from-pink-500 to-rose-500' },
+    { icon: <Shield className="w-6 h-6" />, key: 'accuracy', color: 'from-amber-500 to-yellow-500' },
+    { icon: <Lock className="w-6 h-6" />, key: 'privacy', color: 'from-orange-500 to-amber-600' },
+    { icon: <Lightbulb className="w-6 h-6" />, key: 'insights', color: 'from-red-500 to-orange-500' },
+    { icon: <Gift className="w-6 h-6" />, key: 'free', color: 'from-amber-600 to-red-500' },
   ];
 
   const testimonials = [
@@ -30,26 +30,26 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50 dark:from-stone-900 dark:to-amber-950">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-stone-900/90 border-b border-amber-200 dark:border-amber-800">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
               <Brain className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="text-xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
               {t('common.appName')}
             </span>
           </Link>
           <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="hidden sm:flex items-center gap-1">
+            <Badge variant="secondary" className="hidden sm:flex items-center gap-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
               <Sparkles className="w-3 h-3" />
               {t('common.featured')}
             </Badge>
             <ClerkLoaded>
               {!isSignedIn ? (
                 <SignInButton mode="modal">
-                  <button className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                  <button className="flex items-center gap-2 text-amber-700 dark:text-amber-400 hover:text-amber-900 dark:hover:text-amber-200 transition-colors px-3 py-2 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/20">
                     <span className="font-medium">{t('common.signIn')}</span>
                   </button>
                 </SignInButton>
@@ -57,7 +57,7 @@ export default function Home() {
                 <UserButton 
                   appearance={{
                     elements: {
-                      avatarBox: 'w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500',
+                      avatarBox: 'w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500',
                     }
                   }}
                 />
@@ -71,23 +71,23 @@ export default function Home() {
       <main className="max-w-6xl mx-auto px-4 py-12">
         <section className="text-center mb-20">
           <BlurFade delay={0.1} inView>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-sm font-medium mb-6">
               <Sparkles className="w-4 h-4" />
               {t('hero.badge')}
             </div>
           </BlurFade>
           
           <BlurFade delay={0.2} inView>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-stone-800 dark:text-amber-50 mb-6 leading-tight">
               {t('hero.title')}
-              <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent block mt-2">
+              <span className="bg-gradient-to-r from-amber-600 via-orange-500 to-red-500 bg-clip-text text-transparent block mt-2">
                 {t('hero.highlight')}
               </span>
             </h1>
           </BlurFade>
           
           <BlurFade delay={0.3} inView>
-            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8">
+            <p className="text-lg md:text-xl text-stone-600 dark:text-amber-200/80 max-w-2xl mx-auto leading-relaxed mb-8">
               {t('hero.description')}
             </p>
           </BlurFade>
@@ -95,7 +95,7 @@ export default function Home() {
           <BlurFade delay={0.4} inView>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button 
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-90 text-white text-lg px-8 py-6 h-auto"
+                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:opacity-90 text-white text-lg px-8 py-6 h-auto shadow-lg shadow-orange-500/25"
                 asChild
               >
                 <Link href="#quizzes" className="gap-2">
@@ -109,8 +109,8 @@ export default function Home() {
 
         <section id="quizzes" className="mb-20">
           <BlurFade delay={0.4} inView>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-8 flex items-center gap-3">
-              <span className="w-1.5 h-10 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></span>
+            <h2 className="text-2xl md:text-3xl font-bold text-stone-800 dark:text-amber-50 mb-8 flex items-center gap-3">
+              <span className="w-1.5 h-10 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
               {t('sections.popularQuizzes')}
             </h2>
           </BlurFade>
@@ -123,7 +123,7 @@ export default function Home() {
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
                   <Card 
-                    className="group hover:shadow-2xl transition-all duration-300 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden h-full flex flex-col"
+                    className="group hover:shadow-2xl transition-all duration-300 border-amber-200 dark:border-amber-800/50 bg-white dark:bg-stone-800 overflow-hidden h-full flex flex-col shadow-md shadow-amber-100/50 dark:shadow-stone-900/50"
                   >
                     <div className={`h-2 bg-gradient-to-r ${quiz.color}`}></div>
                     <CardHeader>
@@ -132,24 +132,24 @@ export default function Home() {
                         <Badge 
                           variant="outline" 
                           className={`
-                            ${quiz.difficulty === 'easy' ? 'border-green-500 text-green-600 dark:text-green-400' : ''}
-                            ${quiz.difficulty === 'medium' ? 'border-yellow-500 text-yellow-600 dark:text-yellow-400' : ''}
+                            ${quiz.difficulty === 'easy' ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400' : ''}
+                            ${quiz.difficulty === 'medium' ? 'border-amber-500 text-amber-600 dark:text-amber-400' : ''}
                             ${quiz.difficulty === 'hard' ? 'border-red-500 text-red-600 dark:text-red-400' : ''}
                           `}
                         >
                           {t(`difficulty.${quiz.difficulty}`)}
                         </Badge>
                       </div>
-                      <CardTitle className="text-xl text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                      <CardTitle className="text-xl text-stone-800 dark:text-amber-50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
                         {t(`quizzes.${quiz.id}.title`)}
                       </CardTitle>
-                      <CardDescription className="text-slate-600 dark:text-slate-400 mt-2">
+                      <CardDescription className="text-stone-600 dark:text-amber-200/70 mt-2">
                         {t(`quizzes.${quiz.id}.description`)}
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="flex-1">
-                      <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-500">
-                        <Badge variant="secondary" className="font-normal">
+                      <div className="flex items-center gap-4 text-sm text-stone-500 dark:text-amber-200/60">
+                        <Badge variant="secondary" className="font-normal bg-amber-100/50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-300">
                           {t(`quizzes.${quiz.id}.category`)}
                         </Badge>
                         <span>{quiz.questions.length} {t('questions.count')}</span>
@@ -158,7 +158,7 @@ export default function Home() {
                     <CardFooter>
                       <Link href={`/quiz/${quiz.id}`} className="w-full">
                         <Button 
-                          className={`w-full bg-gradient-to-r ${quiz.color} hover:opacity-90 text-white border-0`}
+                          className={`w-full bg-gradient-to-r ${quiz.color} hover:opacity-90 text-white border-0 shadow-md shadow-orange-500/20`}
                         >
                           {t('common.startQuiz')}
                           <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -174,10 +174,10 @@ export default function Home() {
 
         <section className="mb-20">
           <BlurFade delay={0.6} inView>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center flex items-center justify-center gap-3">
-              <span className="w-1.5 h-10 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></span>
+            <h2 className="text-2xl md:text-3xl font-bold text-stone-800 dark:text-amber-50 mb-12 text-center flex items-center justify-center gap-3">
+              <span className="w-1.5 h-10 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
               {t('sections.features')}
-              <span className="w-1.5 h-10 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></span>
+              <span className="w-1.5 h-10 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
             </h2>
           </BlurFade>
 
@@ -188,19 +188,19 @@ export default function Home() {
                   whileHover={{ y: -4, scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <Card className="h-full border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:shadow-xl transition-all duration-300">
+                  <Card className="h-full border-amber-200/50 dark:border-amber-800/30 bg-white dark:bg-stone-800 hover:shadow-xl transition-all duration-300 shadow-md shadow-amber-100/30 dark:shadow-stone-900/30">
                     <CardHeader className="pb-4">
-                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4`}>
+                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 shadow-lg shadow-orange-500/20`}>
                         <div className="text-white">
                           {feature.icon}
                         </div>
                       </div>
-                      <CardTitle className="text-lg text-slate-900 dark:text-white">
+                      <CardTitle className="text-lg text-stone-800 dark:text-amber-50">
                         {t(`features.${feature.key}.title`)}
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <p className="text-stone-600 dark:text-amber-200/70 leading-relaxed">
                         {t(`features.${feature.key}.description`)}
                       </p>
                     </CardContent>
@@ -213,10 +213,10 @@ export default function Home() {
 
         <section className="mb-20">
           <BlurFade delay={0.8} inView>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center flex items-center justify-center gap-3">
-              <span className="w-1.5 h-10 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></span>
+            <h2 className="text-2xl md:text-3xl font-bold text-stone-800 dark:text-amber-50 mb-12 text-center flex items-center justify-center gap-3">
+              <span className="w-1.5 h-10 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
               {t('sections.testimonials')}
-              <span className="w-1.5 h-10 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></span>
+              <span className="w-1.5 h-10 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
             </h2>
           </BlurFade>
 
@@ -227,35 +227,35 @@ export default function Home() {
                   whileHover={{ y: -4 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <Card className="h-full border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:shadow-xl transition-all duration-300">
+                  <Card className="h-full border-amber-200/50 dark:border-amber-800/30 bg-white dark:bg-stone-800 hover:shadow-xl transition-all duration-300 shadow-md shadow-amber-100/30 dark:shadow-stone-900/30">
                     <CardHeader className="pb-4">
                       <div className="flex items-center justify-between mb-4">
-                        <Quote className="w-8 h-8 text-purple-500/30" />
+                        <Quote className="w-8 h-8 text-amber-500/30" />
                         <div className="flex gap-1">
                           {Array.from({ length: 5 }).map((_, i) => (
                             <Star 
                               key={i} 
-                              className={`w-4 h-4 ${i < testimonial.rating ? 'text-amber-400 fill-amber-400' : 'text-slate-300 dark:text-slate-600'}`} 
+                              className={`w-4 h-4 ${i < testimonial.rating ? 'text-amber-500 fill-amber-500' : 'text-stone-300 dark:text-stone-600'}`} 
                             />
                           ))}
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent className="pb-4">
-                      <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-6 italic">
+                      <p className="text-stone-700 dark:text-amber-100 leading-relaxed mb-6 italic">
                         "{t(`testimonials.${testimonial.key}.content`)}"
                       </p>
                     </CardContent>
-                    <CardFooter className="border-t border-slate-100 dark:border-slate-800 pt-4">
+                    <CardFooter className="border-t border-amber-100 dark:border-amber-900/30 pt-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-bold shadow-md shadow-orange-500/20">
                           {t(`testimonials.${testimonial.key}.name`).charAt(0)}
                         </div>
                         <div>
-                          <p className="font-semibold text-slate-900 dark:text-white">
+                          <p className="font-semibold text-stone-800 dark:text-amber-50">
                             {t(`testimonials.${testimonial.key}.name`)}
                           </p>
-                          <p className="text-sm text-slate-500 dark:text-slate-500">
+                          <p className="text-sm text-stone-500 dark:text-amber-200/60">
                             {t(`testimonials.${testimonial.key}.role`)}
                           </p>
                         </div>
@@ -270,16 +270,16 @@ export default function Home() {
 
         <BlurFade delay={1.0} inView>
           <section className="mb-20">
-            <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 dark:from-purple-500/20 dark:via-pink-500/20 dark:to-orange-500/20 rounded-3xl p-8 md:p-12 border border-purple-200 dark:border-purple-800">
+            <div className="bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-red-500/10 dark:from-amber-500/20 dark:via-orange-500/20 dark:to-red-500/20 rounded-3xl p-8 md:p-12 border border-amber-200 dark:border-amber-800/50 shadow-lg shadow-amber-100/50 dark:shadow-stone-900/50">
               <div className="text-center">
-                <h3 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                <h3 className="text-2xl md:text-4xl font-bold text-stone-800 dark:text-amber-50 mb-4">
                   {t('cta.title')}
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto text-lg">
+                <p className="text-stone-600 dark:text-amber-200/80 mb-8 max-w-2xl mx-auto text-lg">
                   {t('cta.description')}
                 </p>
                 <Button 
-                  className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:opacity-90 text-white text-lg px-10 py-6 h-auto"
+                  className="bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:opacity-90 text-white text-lg px-10 py-6 h-auto shadow-lg shadow-orange-500/30"
                   asChild
                 >
                   <Link href="#quizzes" className="gap-2">
@@ -294,14 +294,14 @@ export default function Home() {
 
         <BlurFade delay={1.1} inView>
           <section className="text-center">
-            <div className="bg-gradient-to-r from-slate-100/50 to-slate-50/50 dark:from-slate-800/50 dark:to-slate-900/50 rounded-3xl p-8 md:p-12 border border-slate-200 dark:border-slate-700">
-              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4">
+            <div className="bg-gradient-to-r from-amber-100/50 to-orange-50/50 dark:from-stone-800/50 dark:to-amber-950/50 rounded-3xl p-8 md:p-12 border border-amber-200 dark:border-amber-800/30">
+              <h3 className="text-2xl md:text-3xl font-bold text-stone-800 dark:text-amber-50 mb-4">
                 {t('common.comingSoon')}
               </h3>
-              <p className="text-slate-600 dark:text-slate-400 mb-6 max-w-xl mx-auto">
+              <p className="text-stone-600 dark:text-amber-200/70 mb-6 max-w-xl mx-auto">
                 {t('common.comingSoonDesc')}
               </p>
-              <Button variant="outline" className="gap-2">
+              <Button variant="outline" className="gap-2 border-amber-300 text-amber-700 hover:bg-amber-100 dark:border-amber-700 dark:text-amber-300 dark:hover:bg-amber-900/20">
                 <Sparkles className="w-4 h-4" />
                 {t('common.subscribe')}
               </Button>
@@ -310,18 +310,18 @@ export default function Home() {
         </BlurFade>
       </main>
 
-      <footer className="mt-20 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+      <footer className="mt-20 border-t border-amber-200 dark:border-amber-800/50 bg-white dark:bg-stone-900">
         <div className="max-w-6xl mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-md shadow-orange-500/20">
                 <Brain className="w-4 h-4 text-white" />
               </div>
-              <span className="font-semibold text-slate-900 dark:text-white">
+              <span className="font-semibold text-stone-800 dark:text-amber-50">
                 {t('common.appName')}
               </span>
             </div>
-            <p className="text-sm text-slate-500 dark:text-slate-500">
+            <p className="text-sm text-stone-500 dark:text-amber-200/60">
               {t('common.footer')}
             </p>
           </div>

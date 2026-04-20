@@ -72,7 +72,7 @@ export function LanguageSwitcher() {
       <Button
         variant="ghost"
         size="sm"
-        className="flex items-center gap-2 px-3 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+        className="flex items-center gap-2 px-3 hover:bg-amber-100 dark:hover:bg-amber-900/20 text-amber-700 dark:text-amber-300 hover:text-amber-900 dark:hover:text-amber-100"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Globe className="w-4 h-4" />
@@ -82,22 +82,22 @@ export function LanguageSwitcher() {
       </Button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-48 rounded-xl bg-white dark:bg-slate-900 shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden z-50">
+        <div className="absolute right-0 top-full mt-2 w-48 rounded-xl bg-white dark:bg-stone-800 shadow-lg border border-amber-200 dark:border-amber-800/50 overflow-hidden z-50">
           {languages.map((lang) => (
             <button
               key={lang.code}
               type="button"
-              className={`w-full px-4 py-3 text-left flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors ${
+              className={`w-full px-4 py-3 text-left flex items-center gap-3 hover:bg-amber-50 dark:hover:bg-stone-700 transition-colors ${
                 locale === lang.code 
-                  ? 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400' 
-                  : 'text-slate-700 dark:text-slate-300'
+                  ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300' 
+                  : 'text-stone-700 dark:text-amber-100'
               }`}
               onClick={() => handleLanguageChange(lang.code)}
             >
               <span className="text-xl">{lang.flag}</span>
               <span className="text-sm font-medium">{lang.name}</span>
               {locale === lang.code && (
-                <span className="ml-auto w-2 h-2 rounded-full bg-purple-500"></span>
+                <span className="ml-auto w-2 h-2 rounded-full bg-amber-500"></span>
               )}
             </button>
           ))}
