@@ -269,20 +269,18 @@ export default function ResultPage({ params }: ResultPageProps) {
             <div className="p-6">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button
-                  variant="outline"
                   onClick={() => router.push(`/quiz/${quiz.id}`)}
-                  className="w-full sm:w-auto gap-2 border-2 border-stone-900 dark:border-stone-600 text-stone-900 dark:text-stone-100 hover:bg-orange-100 dark:hover:bg-orange-900/20 font-bold rounded-xl shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] dark:shadow-[2px_2px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                  className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white gap-2 text-lg px-8 py-6 h-auto font-bold border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                 >
-                  <RotateCcw className="w-4 h-4" />
+                  <RotateCcw className="w-5 h-5" />
                   {t('common.retakeQuiz') || '重新测试'}
                 </Button>
                 
                 <Button
-                  variant="outline"
                   onClick={() => router.push('/')}
-                  className="w-full sm:w-auto gap-2 border-2 border-stone-900 dark:border-stone-600 text-stone-900 dark:text-stone-100 hover:bg-orange-100 dark:hover:bg-orange-900/20 font-bold rounded-xl shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] dark:shadow-[2px_2px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                  className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white gap-2 text-lg px-8 py-6 h-auto font-bold border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                 >
-                  <Home className="w-4 h-4" />
+                  <Home className="w-5 h-5" />
                   {t('common.browseMore') || '浏览更多测试'}
                 </Button>
 

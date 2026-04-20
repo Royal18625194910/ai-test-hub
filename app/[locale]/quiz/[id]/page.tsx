@@ -206,12 +206,11 @@ export default function QuizPage({ params }: QuizPageProps) {
             <div className="p-6">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
                 <Button
-                  variant="outline"
                   onClick={handlePrevious}
                   disabled={currentQuestionIndex === 0}
-                  className="w-full sm:w-auto gap-2 border-2 border-stone-900 dark:border-stone-600 text-stone-900 dark:text-stone-100 hover:bg-orange-100 dark:hover:bg-orange-900/20 font-bold rounded-xl shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] dark:shadow-[2px_2px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                  className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white gap-2 text-lg px-8 py-6 h-auto font-bold border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                 >
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="w-5 h-5" />
                   {t('common.previous') || '上一题'}
                 </Button>
 
