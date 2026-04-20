@@ -8,9 +8,36 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { BlurFade } from '@/components/ui/blur-fade';
 import { LanguageSwitcher } from '@/components/language-switcher';
-import { ChevronRight, Brain, Sparkles, Shield, Lock, Lightbulb, Gift, Quote, Star, ArrowRight } from 'lucide-react';
+import { ChevronRight, Brain, Sparkles, Shield, Lock, Lightbulb, Gift, Quote, Star, ArrowRight, Clock, MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useAuth, SignInButton, UserButton, ClerkLoaded } from '@clerk/nextjs';
+import Image from 'next/image';
+
+const StickerCard = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay, duration: 0.5 }}
+    className={`relative ${className}`}
+  >
+    <div className="absolute inset-0 bg-stone-900 dark:bg-black rounded-xl translate-x-1 translate-y-1" />
+    <div className="relative bg-white dark:bg-stone-800 border-2 border-stone-900 dark:border-stone-600 rounded-xl">
+      {children}
+    </div>
+  </motion.div>
+);
+
+const StickerButton = ({ children, variant = 'primary', className = '', ...props }: any) => {
+  const baseStyles = 'relative inline-flex items-center justify-center gap-2 whitespace-nowrap font-bold transition-transform hover:-translate-y-0.5 active:translate-y-0';
+  const primaryStyles = 'bg-orange-500 text-white border-2 border-stone-900 dark:border-stone-600 rounded-2xl px-8 py-4 text-lg shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)]';
+  const secondaryStyles = 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 border-2 border-stone-900 dark:border-stone-600 rounded-2xl px-8 py-4 text-lg shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)]';
+  
+  return (
+    <button className={`${baseStyles} ${variant === 'primary' ? primaryStyles : secondaryStyles} ${className}`} {...props}>
+      {children}
+    </button>
+  );
+};
 
 export default function Home() {
   const t = useTranslations();
@@ -30,87 +57,178 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50 dark:from-stone-900 dark:to-amber-950">
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-stone-900/90 border-b border-amber-200 dark:border-amber-800">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
-              <Brain className="w-6 h-6 text-white" />
+    <div className="min-h-screen bg-amber-50 dark:from-stone-900 dark:to-amber-950">
+      <header className="sticky top-0 z-50 bg-amber-50/95 dark:bg-stone-900/95 backdrop-blur-sm py-4">
+        <div className="max-w-6xl mx-auto px-4">
+          <StickerCard className="overflow-hidden" delay={0.1}>
+            <div className="px-6 py-4 flex items-center justify-between">
+              <Link href="/" className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center border-2 border-stone-900">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-xl font-black text-stone-900 dark:text-stone-100 tracking-tight">
+                  {t('common.appName')}
+                </span>
+              </Link>
+              
+              <nav className="hidden md:flex items-center gap-8">
+                <Link href="#quizzes" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                  {t('sections.popularQuizzes')}
+                </Link>
+                <Link href="#features" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                  {t('sections.features')}
+                </Link>
+              </nav>
+
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary" className="hidden sm:flex items-center gap-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
+                  <Sparkles className="w-3 h-3" />
+                  {t('common.featured')}
+                </Badge>
+                <ClerkLoaded>
+                  {!isSignedIn ? (
+                    <SignInButton mode="modal">
+                      <button className="font-bold text-stone-900 dark:text-stone-100 hover:text-orange-600 dark:hover:text-orange-400 transition-colors px-3 py-2">
+                        {t('common.signIn')}
+                      </button>
+                    </SignInButton>
+                  ) : (
+                    <UserButton 
+                      appearance={{
+                        elements: {
+                          avatarBox: 'w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 border-2 border-stone-900',
+                        }
+                      }}
+                    />
+                  )}
+                </ClerkLoaded>
+                <LanguageSwitcher />
+              </div>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-              {t('common.appName')}
-            </span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="hidden sm:flex items-center gap-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
-              <Sparkles className="w-3 h-3" />
-              {t('common.featured')}
-            </Badge>
-            <ClerkLoaded>
-              {!isSignedIn ? (
-                <SignInButton mode="modal">
-                  <button className="flex items-center gap-2 text-amber-700 dark:text-amber-400 hover:text-amber-900 dark:hover:text-amber-200 transition-colors px-3 py-2 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/20">
-                    <span className="font-medium">{t('common.signIn')}</span>
-                  </button>
-                </SignInButton>
-              ) : (
-                <UserButton 
-                  appearance={{
-                    elements: {
-                      avatarBox: 'w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500',
-                    }
-                  }}
-                />
-              )}
-            </ClerkLoaded>
-            <LanguageSwitcher />
-          </div>
+          </StickerCard>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-12">
-        <section className="text-center mb-20">
-          <BlurFade delay={0.1} inView>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-sm font-medium mb-6">
-              <Sparkles className="w-4 h-4" />
-              {t('hero.badge')}
-            </div>
-          </BlurFade>
-          
-          <BlurFade delay={0.2} inView>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-stone-800 dark:text-amber-50 mb-6 leading-tight">
-              {t('hero.title')}
-              <span className="bg-gradient-to-r from-amber-600 via-orange-500 to-red-500 bg-clip-text text-transparent block mt-2">
-                {t('hero.highlight')}
-              </span>
-            </h1>
-          </BlurFade>
-          
-          <BlurFade delay={0.3} inView>
-            <p className="text-lg md:text-xl text-stone-600 dark:text-amber-200/80 max-w-2xl mx-auto leading-relaxed mb-8">
-              {t('hero.description')}
-            </p>
-          </BlurFade>
+        <section className="mb-24">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <BlurFade delay={0.2} inView>
+              <div className="space-y-8">
+                <div className="inline-flex items-center gap-2 px-4 py-2 border-2 border-stone-900 dark:border-stone-600 bg-white dark:bg-stone-800 rounded-md">
+                  <Sparkles className="w-4 h-4 text-orange-500" />
+                  <span className="font-bold text-stone-900 dark:text-stone-100 text-sm">{t('hero.badge')}</span>
+                </div>
 
-          <BlurFade delay={0.4} inView>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button 
-                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:opacity-90 text-white text-lg px-8 py-6 h-auto shadow-lg shadow-orange-500/25"
-                asChild
-              >
-                <Link href="#quizzes" className="gap-2">
-                  {t('common.startQuiz')}
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </Button>
-            </div>
-          </BlurFade>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-stone-900 dark:text-stone-100 leading-tight tracking-tight">
+                  {t('hero.title')}
+                  <span className="block text-orange-500 mt-2">
+                    {t('hero.highlight')}
+                  </span>
+                </h1>
+
+                <p className="text-lg md:text-xl text-stone-600 dark:text-stone-300 leading-relaxed max-w-xl">
+                  {t('hero.description')}
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-start gap-4">
+                  <Button 
+                    className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-8 py-6 h-auto font-bold border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                    asChild
+                  >
+                    <Link href="#quizzes" className="gap-2">
+                      {t('common.startQuiz')}
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-6 pt-4">
+                  <div className="flex items-center gap-2 text-stone-600 dark:text-stone-400">
+                    <Clock className="w-5 h-5 text-orange-500" />
+                    <span className="font-medium">5-10 分钟完成</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-stone-600 dark:text-stone-400">
+                    <MapPin className="w-5 h-5 text-orange-500" />
+                    <span className="font-medium">随时随地测试</span>
+                  </div>
+                </div>
+              </div>
+            </BlurFade>
+
+            <BlurFade delay={0.3} inView>
+              <div className="relative">
+                <div className="grid grid-cols-2 gap-3">
+                  <motion.div
+                    className="relative aspect-square rounded-lg overflow-hidden border-2 border-stone-900 dark:border-stone-600 shadow-[3px_3px_0px_0px_rgba(28,25,23,1)]"
+                    whileHover={{ y: -4, rotate: -1 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  >
+                    <Image
+                      src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=psychological%20test%20concept%20with%20colorful%20personality%20traits%20visualization%2C%20warm%20colors%2C%20artistic%20style&image_size=square_hd"
+                      alt="性格测试"
+                      fill
+                      className="object-cover"
+                    />
+                  </motion.div>
+                  
+                  <motion.div
+                    className="relative aspect-square rounded-lg overflow-hidden border-2 border-stone-900 dark:border-stone-600 shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] translate-y-8"
+                    whileHover={{ y: 4, rotate: 1 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  >
+                    <Image
+                      src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=brain%20thinking%20concept%20with%20neurons%20and%20connections%2C%20creative%20mind%20map%2C%20warm%20orange%20tones&image_size=square_hd"
+                      alt="思维探索"
+                      fill
+                      className="object-cover"
+                    />
+                  </motion.div>
+
+                  <motion.div
+                    className="relative aspect-square rounded-lg overflow-hidden border-2 border-stone-900 dark:border-stone-600 shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] -translate-y-4"
+                    whileHover={{ y: -8, rotate: -1 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  >
+                    <Image
+                      src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=emotional%20intelligence%20concept%20with%20colorful%20emotions%20represented%20as%20soft%20shapes%2C%20warm%20palette&image_size=square_hd"
+                      alt="情感探索"
+                      fill
+                      className="object-cover"
+                    />
+                  </motion.div>
+
+                  <motion.div
+                    className="relative aspect-square rounded-lg overflow-hidden border-2 border-stone-900 dark:border-stone-600 shadow-[3px_3px_0px_0px_rgba(28,25,23,1)]"
+                    whileHover={{ y: -4, rotate: 1 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  >
+                    <Image
+                      src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=discovery%20journey%20concept%20with%20path%20and%20milestones%2C%20adventure%20theme%2C%20warm%20cozy%20colors&image_size=square_hd"
+                      alt="自我发现"
+                      fill
+                      className="object-cover"
+                    />
+                  </motion.div>
+                </div>
+
+                <motion.div
+                  className="absolute -bottom-6 -left-6 bg-orange-500 text-white border-2 border-stone-900 dark:border-stone-600 rounded-lg px-6 py-4 shadow-[3px_3px_0px_0px_rgba(28,25,23,1)]"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.6, type: 'spring' }}
+                >
+                  <div className="text-3xl font-black">10+</div>
+                  <div className="text-sm font-bold opacity-90">精选测试</div>
+                </motion.div>
+              </div>
+            </BlurFade>
+          </div>
         </section>
 
-        <section id="quizzes" className="mb-20">
+        <section id="quizzes" className="mb-24">
           <BlurFade delay={0.4} inView>
-            <h2 className="text-2xl md:text-3xl font-bold text-stone-800 dark:text-amber-50 mb-8 flex items-center gap-3">
-              <span className="w-1.5 h-10 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 dark:text-stone-100 mb-12 flex items-center gap-4">
+              <span className="w-2 h-12 bg-orange-500 rounded-full"></span>
               {t('sections.popularQuizzes')}
             </h2>
           </BlurFade>
@@ -119,65 +237,66 @@ export default function Home() {
             {quizzes.map((quiz, index) => (
               <BlurFade key={quiz.id} delay={0.5 + index * 0.1} inView>
                 <motion.div
-                  whileHover={{ y: -8, scale: 1.02 }}
+                  whileHover={{ y: -8 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <Card 
-                    className="group hover:shadow-2xl transition-all duration-300 border-amber-200 dark:border-amber-800/50 bg-white dark:bg-stone-800 overflow-hidden h-full flex flex-col shadow-md shadow-amber-100/50 dark:shadow-stone-900/50"
-                  >
-                    <div className={`h-2 bg-gradient-to-r ${quiz.color}`}></div>
-                    <CardHeader>
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="text-4xl">{quiz.icon}</div>
-                        <Badge 
-                          variant="outline" 
-                          className={`
-                            ${quiz.difficulty === 'easy' ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400' : ''}
-                            ${quiz.difficulty === 'medium' ? 'border-amber-500 text-amber-600 dark:text-amber-400' : ''}
-                            ${quiz.difficulty === 'hard' ? 'border-red-500 text-red-600 dark:text-red-400' : ''}
-                          `}
-                        >
-                          {t(`difficulty.${quiz.difficulty}`)}
-                        </Badge>
-                      </div>
-                      <CardTitle className="text-xl text-stone-800 dark:text-amber-50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-                        {t(`quizzes.${quiz.id}.title`)}
-                      </CardTitle>
-                      <CardDescription className="text-stone-600 dark:text-amber-200/70 mt-2">
-                        {t(`quizzes.${quiz.id}.description`)}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex-1">
-                      <div className="flex items-center gap-4 text-sm text-stone-500 dark:text-amber-200/60">
-                        <Badge variant="secondary" className="font-normal bg-amber-100/50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-300">
-                          {t(`quizzes.${quiz.id}.category`)}
-                        </Badge>
-                        <span>{quiz.questions.length} {t('questions.count')}</span>
-                      </div>
-                    </CardContent>
-                    <CardFooter>
-                      <Link href={`/quiz/${quiz.id}`} className="w-full">
-                        <Button 
-                          className={`w-full bg-gradient-to-r ${quiz.color} hover:opacity-90 text-white border-0 shadow-md shadow-orange-500/20`}
-                        >
-                          {t('common.startQuiz')}
-                          <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                        </Button>
-                      </Link>
-                    </CardFooter>
-                  </Card>
+                  <StickerCard delay={0.5 + index * 0.1}>
+                    <Card className="border-0 bg-transparent overflow-hidden h-full flex flex-col">
+                      <div className={`h-3 bg-gradient-to-r ${quiz.color}`}></div>
+                      <CardHeader>
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="text-5xl">{quiz.icon}</div>
+                          <Badge 
+                            variant="outline" 
+                            className={`
+                              font-bold px-3 py-1
+                              ${quiz.difficulty === 'easy' ? 'border-emerald-600 text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20' : ''}
+                              ${quiz.difficulty === 'medium' ? 'border-amber-600 text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20' : ''}
+                              ${quiz.difficulty === 'hard' ? 'border-red-600 text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20' : ''}
+                            `}
+                          >
+                            {t(`difficulty.${quiz.difficulty}`)}
+                          </Badge>
+                        </div>
+                        <CardTitle className="text-xl font-black text-stone-900 dark:text-stone-100">
+                          {t(`quizzes.${quiz.id}.title`)}
+                        </CardTitle>
+                        <CardDescription className="text-stone-600 dark:text-stone-400 mt-2 leading-relaxed">
+                          {t(`quizzes.${quiz.id}.description`)}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="flex-1">
+                        <div className="flex items-center gap-4 text-sm">
+                          <Badge variant="secondary" className="font-bold bg-amber-100 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-700">
+                            {t(`quizzes.${quiz.id}.category`)}
+                          </Badge>
+                          <span className="text-stone-500 dark:text-stone-400 font-medium">{quiz.questions.length} {t('questions.count')}</span>
+                        </div>
+                      </CardContent>
+                      <CardFooter>
+                        <Link href={`/quiz/${quiz.id}`} className="w-full">
+                          <Button 
+                            className={`w-full bg-gradient-to-r ${quiz.color} hover:opacity-90 text-white font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all`}
+                          >
+                            {t('common.startQuiz')}
+                            <ChevronRight className="w-4 h-4 ml-1" />
+                          </Button>
+                        </Link>
+                      </CardFooter>
+                    </Card>
+                  </StickerCard>
                 </motion.div>
               </BlurFade>
             ))}
           </div>
         </section>
 
-        <section className="mb-20">
+        <section id="features" className="mb-24">
           <BlurFade delay={0.6} inView>
-            <h2 className="text-2xl md:text-3xl font-bold text-stone-800 dark:text-amber-50 mb-12 text-center flex items-center justify-center gap-3">
-              <span className="w-1.5 h-10 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 dark:text-stone-100 mb-12 text-center flex items-center justify-center gap-4">
+              <span className="w-2 h-12 bg-orange-500 rounded-full"></span>
               {t('sections.features')}
-              <span className="w-1.5 h-10 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
+              <span className="w-2 h-12 bg-orange-500 rounded-full"></span>
             </h2>
           </BlurFade>
 
@@ -185,38 +304,40 @@ export default function Home() {
             {features.map((feature, index) => (
               <BlurFade key={feature.key} delay={0.7 + index * 0.1} inView>
                 <motion.div
-                  whileHover={{ y: -4, scale: 1.02 }}
+                  whileHover={{ y: -4 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <Card className="h-full border-amber-200/50 dark:border-amber-800/30 bg-white dark:bg-stone-800 hover:shadow-xl transition-all duration-300 shadow-md shadow-amber-100/30 dark:shadow-stone-900/30">
-                    <CardHeader className="pb-4">
-                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 shadow-lg shadow-orange-500/20`}>
-                        <div className="text-white">
-                          {feature.icon}
+                  <StickerCard delay={0.7 + index * 0.1}>
+                    <Card className="border-0 bg-transparent h-full">
+                      <CardHeader className="pb-4">
+                        <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 border-2 border-stone-900 dark:border-stone-600 shadow-[3px_3px_0px_0px_rgba(28,25,23,1)]`}>
+                          <div className="text-white">
+                            {feature.icon}
+                          </div>
                         </div>
-                      </div>
-                      <CardTitle className="text-lg text-stone-800 dark:text-amber-50">
-                        {t(`features.${feature.key}.title`)}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-stone-600 dark:text-amber-200/70 leading-relaxed">
-                        {t(`features.${feature.key}.description`)}
-                      </p>
-                    </CardContent>
-                  </Card>
+                        <CardTitle className="text-lg font-black text-stone-900 dark:text-stone-100">
+                          {t(`features.${feature.key}.title`)}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
+                          {t(`features.${feature.key}.description`)}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </StickerCard>
                 </motion.div>
               </BlurFade>
             ))}
           </div>
         </section>
 
-        <section className="mb-20">
+        <section className="mb-24">
           <BlurFade delay={0.8} inView>
-            <h2 className="text-2xl md:text-3xl font-bold text-stone-800 dark:text-amber-50 mb-12 text-center flex items-center justify-center gap-3">
-              <span className="w-1.5 h-10 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 dark:text-stone-100 mb-12 text-center flex items-center justify-center gap-4">
+              <span className="w-2 h-12 bg-orange-500 rounded-full"></span>
               {t('sections.testimonials')}
-              <span className="w-1.5 h-10 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full"></span>
+              <span className="w-2 h-12 bg-orange-500 rounded-full"></span>
             </h2>
           </BlurFade>
 
@@ -227,41 +348,43 @@ export default function Home() {
                   whileHover={{ y: -4 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <Card className="h-full border-amber-200/50 dark:border-amber-800/30 bg-white dark:bg-stone-800 hover:shadow-xl transition-all duration-300 shadow-md shadow-amber-100/30 dark:shadow-stone-900/30">
-                    <CardHeader className="pb-4">
-                      <div className="flex items-center justify-between mb-4">
-                        <Quote className="w-8 h-8 text-amber-500/30" />
-                        <div className="flex gap-1">
-                          {Array.from({ length: 5 }).map((_, i) => (
-                            <Star 
-                              key={i} 
-                              className={`w-4 h-4 ${i < testimonial.rating ? 'text-amber-500 fill-amber-500' : 'text-stone-300 dark:text-stone-600'}`} 
-                            />
-                          ))}
+                  <StickerCard delay={0.9 + index * 0.1}>
+                    <Card className="border-0 bg-transparent h-full">
+                      <CardHeader className="pb-4">
+                        <div className="flex items-center justify-between mb-4">
+                          <Quote className="w-10 h-10 text-orange-500/30" />
+                          <div className="flex gap-1">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                              <Star 
+                                key={i} 
+                                className={`w-5 h-5 ${i < testimonial.rating ? 'text-orange-500 fill-orange-500' : 'text-stone-300 dark:text-stone-600'}`} 
+                              />
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pb-4">
-                      <p className="text-stone-700 dark:text-amber-100 leading-relaxed mb-6 italic">
-                        "{t(`testimonials.${testimonial.key}.content`)}"
-                      </p>
-                    </CardContent>
-                    <CardFooter className="border-t border-amber-100 dark:border-amber-900/30 pt-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-bold shadow-md shadow-orange-500/20">
-                          {t(`testimonials.${testimonial.key}.name`).charAt(0)}
+                      </CardHeader>
+                      <CardContent className="pb-4">
+                        <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-6 italic font-medium">
+                          "{t(`testimonials.${testimonial.key}.content`)}"
+                        </p>
+                      </CardContent>
+                      <CardFooter className="border-t border-stone-200 dark:border-stone-700 pt-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-black border-2 border-stone-900 dark:border-stone-600 shadow-[2px_2px_0px_0px_rgba(28,25,23,1)]">
+                            {t(`testimonials.${testimonial.key}.name`).charAt(0)}
+                          </div>
+                          <div>
+                            <p className="font-black text-stone-900 dark:text-stone-100">
+                              {t(`testimonials.${testimonial.key}.name`)}
+                            </p>
+                            <p className="text-sm text-stone-500 dark:text-stone-400 font-medium">
+                              {t(`testimonials.${testimonial.key}.role`)}
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="font-semibold text-stone-800 dark:text-amber-50">
-                            {t(`testimonials.${testimonial.key}.name`)}
-                          </p>
-                          <p className="text-sm text-stone-500 dark:text-amber-200/60">
-                            {t(`testimonials.${testimonial.key}.role`)}
-                          </p>
-                        </div>
-                      </div>
-                    </CardFooter>
-                  </Card>
+                      </CardFooter>
+                    </Card>
+                  </StickerCard>
                 </motion.div>
               </BlurFade>
             ))}
@@ -269,59 +392,63 @@ export default function Home() {
         </section>
 
         <BlurFade delay={1.0} inView>
-          <section className="mb-20">
-            <div className="bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-red-500/10 dark:from-amber-500/20 dark:via-orange-500/20 dark:to-red-500/20 rounded-3xl p-8 md:p-12 border border-amber-200 dark:border-amber-800/50 shadow-lg shadow-amber-100/50 dark:shadow-stone-900/50">
-              <div className="text-center">
-                <h3 className="text-2xl md:text-4xl font-bold text-stone-800 dark:text-amber-50 mb-4">
-                  {t('cta.title')}
-                </h3>
-                <p className="text-stone-600 dark:text-amber-200/80 mb-8 max-w-2xl mx-auto text-lg">
-                  {t('cta.description')}
-                </p>
-                <Button 
-                  className="bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:opacity-90 text-white text-lg px-10 py-6 h-auto shadow-lg shadow-orange-500/30"
-                  asChild
-                >
-                  <Link href="#quizzes" className="gap-2">
-                    {t('cta.button')}
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                </Button>
+          <section className="mb-24">
+            <StickerCard delay={1.0}>
+              <div className="bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-red-500/10 dark:from-orange-500/20 dark:via-amber-500/20 dark:to-red-500/20 p-8 md:p-12">
+                <div className="text-center">
+                  <h3 className="text-3xl md:text-5xl font-black text-stone-900 dark:text-stone-100 mb-4">
+                    {t('cta.title')}
+                  </h3>
+                  <p className="text-stone-600 dark:text-stone-400 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
+                    {t('cta.description')}
+                  </p>
+                  <Button 
+                    className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-10 py-6 h-auto font-black border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                    asChild
+                  >
+                    <Link href="#quizzes" className="gap-2">
+                      {t('cta.button')}
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  </Button>
+                </div>
               </div>
-            </div>
+            </StickerCard>
           </section>
         </BlurFade>
 
         <BlurFade delay={1.1} inView>
-          <section className="text-center">
-            <div className="bg-gradient-to-r from-amber-100/50 to-orange-50/50 dark:from-stone-800/50 dark:to-amber-950/50 rounded-3xl p-8 md:p-12 border border-amber-200 dark:border-amber-800/30">
-              <h3 className="text-2xl md:text-3xl font-bold text-stone-800 dark:text-amber-50 mb-4">
-                {t('common.comingSoon')}
-              </h3>
-              <p className="text-stone-600 dark:text-amber-200/70 mb-6 max-w-xl mx-auto">
-                {t('common.comingSoonDesc')}
-              </p>
-              <Button variant="outline" className="gap-2 border-amber-300 text-amber-700 hover:bg-amber-100 dark:border-amber-700 dark:text-amber-300 dark:hover:bg-amber-900/20">
-                <Sparkles className="w-4 h-4" />
-                {t('common.subscribe')}
-              </Button>
-            </div>
+          <section className="text-center mb-16">
+            <StickerCard delay={1.1}>
+              <div className="bg-gradient-to-r from-amber-100/50 to-orange-50/50 dark:from-stone-800/50 dark:to-amber-950/50 p-8 md:p-12">
+                <h3 className="text-2xl md:text-3xl font-black text-stone-900 dark:text-stone-100 mb-4">
+                  {t('common.comingSoon')}
+                </h3>
+                <p className="text-stone-600 dark:text-stone-400 mb-6 max-w-xl mx-auto leading-relaxed">
+                  {t('common.comingSoonDesc')}
+                </p>
+                <Button variant="outline" className="gap-2 border-2 border-stone-900 dark:border-stone-600 text-stone-900 dark:text-stone-100 hover:bg-orange-100 dark:hover:bg-orange-900/20 font-bold rounded-xl shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all">
+                  <Sparkles className="w-4 h-4" />
+                  {t('common.subscribe')}
+                </Button>
+              </div>
+            </StickerCard>
           </section>
         </BlurFade>
       </main>
 
-      <footer className="mt-20 border-t border-amber-200 dark:border-amber-800/50 bg-white dark:bg-stone-900">
+      <footer className="mt-16 border-t-2 border-stone-900 dark:border-stone-600 bg-white dark:bg-stone-900">
         <div className="max-w-6xl mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-md shadow-orange-500/20">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center border-2 border-stone-900 dark:border-stone-600">
                 <Brain className="w-4 h-4 text-white" />
               </div>
-              <span className="font-semibold text-stone-800 dark:text-amber-50">
+              <span className="font-black text-stone-900 dark:text-stone-100">
                 {t('common.appName')}
               </span>
             </div>
-            <p className="text-sm text-stone-500 dark:text-amber-200/60">
+            <p className="text-sm text-stone-500 dark:text-stone-400 font-medium">
               {t('common.footer')}
             </p>
           </div>
