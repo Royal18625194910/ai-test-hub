@@ -58,54 +58,57 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-amber-50 dark:from-stone-900 dark:to-amber-950">
-      <header className="sticky top-0 z-50 bg-amber-50/95 dark:bg-stone-900/95 backdrop-blur-sm py-4">
+      <header className="sticky top-0 z-[60] bg-amber-50/95 dark:bg-stone-900/95 backdrop-blur-sm py-4">
         <div className="max-w-6xl mx-auto px-4">
-          <StickerCard className="overflow-hidden" delay={0.1}>
-            <div className="px-6 py-4 flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center border-2 border-stone-900">
-                  <Brain className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-xl font-black text-stone-900 dark:text-stone-100 tracking-tight">
-                  {t('common.appName')}
-                </span>
-              </Link>
-              
-              <nav className="hidden md:flex items-center gap-8">
-                <Link href="#quizzes" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  {t('sections.popularQuizzes')}
+          <div className="relative">
+            <div className="absolute inset-0 bg-stone-900 dark:bg-black rounded-xl translate-x-1 translate-y-1" />
+            <div className="relative bg-white dark:bg-stone-800 border-2 border-stone-900 dark:border-stone-600 rounded-xl">
+              <div className="px-6 py-4 flex items-center justify-between">
+                <Link href="/" className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center border-2 border-stone-900">
+                    <Brain className="w-6 h-6 text-white" />
+                  </div>
+                  <span className="text-xl font-black text-stone-900 dark:text-stone-100 tracking-tight">
+                    {t('common.appName')}
+                  </span>
                 </Link>
-                <Link href="#features" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  {t('sections.features')}
-                </Link>
-              </nav>
+                
+                <nav className="hidden md:flex items-center gap-8">
+                  <Link href="#quizzes" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    {t('sections.popularQuizzes')}
+                  </Link>
+                  <Link href="#features" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    {t('sections.features')}
+                  </Link>
+                </nav>
 
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary" className="hidden sm:flex items-center gap-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
-                  <Sparkles className="w-3 h-3" />
-                  {t('common.featured')}
-                </Badge>
-                <ClerkLoaded>
-                  {!isSignedIn ? (
-                    <SignInButton mode="modal">
-                      <button className="font-bold text-stone-900 dark:text-stone-100 hover:text-orange-600 dark:hover:text-orange-400 transition-colors px-3 py-2">
-                        {t('common.signIn')}
-                      </button>
-                    </SignInButton>
-                  ) : (
-                    <UserButton 
-                      appearance={{
-                        elements: {
-                          avatarBox: 'w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 border-2 border-stone-900',
-                        }
-                      }}
-                    />
-                  )}
-                </ClerkLoaded>
-                <LanguageSwitcher />
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary" className="hidden sm:flex items-center gap-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
+                    <Sparkles className="w-3 h-3" />
+                    {t('common.featured')}
+                  </Badge>
+                  <ClerkLoaded>
+                    {!isSignedIn ? (
+                      <SignInButton mode="modal">
+                        <button className="font-bold text-stone-900 dark:text-stone-100 hover:text-orange-600 dark:hover:text-orange-400 transition-colors px-3 py-2">
+                          {t('common.signIn')}
+                        </button>
+                      </SignInButton>
+                    ) : (
+                      <UserButton 
+                        appearance={{
+                          elements: {
+                            avatarBox: 'w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 border-2 border-stone-900',
+                          }
+                        }}
+                      />
+                    )}
+                  </ClerkLoaded>
+                  <LanguageSwitcher />
+                </div>
               </div>
             </div>
-          </StickerCard>
+          </div>
         </div>
       </header>
 
