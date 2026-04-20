@@ -158,10 +158,12 @@ export default function ResultPage({ params }: ResultPageProps) {
       <main className="max-w-4xl mx-auto px-4 py-8">
         <StickerCard delay={0.1} className="mb-8">
           <div className="p-6 text-center">
-            <Badge variant="secondary" className="mb-4 flex items-center gap-1 mx-auto bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
-              <Sparkles className="w-3 h-3" />
-              {t('common.testCompleted') || '测试完成'}
-            </Badge>
+            <div className="inline-flex items-center gap-2 px-4 py-2 border-2 border-stone-900 dark:border-stone-600 bg-white dark:bg-stone-800 rounded-md mb-4">
+              <Sparkles className="w-4 h-4 text-orange-500" />
+              <span className="font-bold text-stone-900 dark:text-stone-100 text-sm">
+                {t('common.testCompleted') || '测试完成'}
+              </span>
+            </div>
             <h1 className="text-2xl md:text-3xl font-black text-stone-900 dark:text-stone-100 mb-2">
               {t('common.yourResult') || '你的测试结果'}
             </h1>
@@ -195,7 +197,7 @@ export default function ResultPage({ params }: ResultPageProps) {
                 <div className="flex flex-col items-center gap-4">
                   <Button
                     onClick={handleUnlock}
-                    className="bg-orange-500 hover:bg-orange-600 text-white gap-2 w-full sm:w-auto text-lg py-6 px-8 font-bold border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                    className="bg-orange-500 hover:bg-orange-600 text-white gap-2 w-full sm:w-auto text-lg py-6 px-8 font-black border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                   >
                     <Unlock className="w-5 h-5" />
                     {isSignedIn ? (t('common.unlockResult') || '解锁查看结果') : (t('common.loginToUnlock') || '登录解锁结果')}
@@ -286,7 +288,7 @@ export default function ResultPage({ params }: ResultPageProps) {
 
                 {isUnlocked && (
                   <Button
-                    className={`w-full sm:w-auto bg-gradient-to-r ${getResultColor(result.type)} hover:opacity-90 text-white gap-2 font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] dark:shadow-[3px_3px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all`}
+                    className={`w-full sm:w-auto bg-gradient-to-r ${getResultColor(result.type)} hover:opacity-90 text-white gap-2 font-black border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all`}
                   >
                     <Share2 className="w-4 h-4" />
                     {t('common.shareResult') || '分享结果'}
