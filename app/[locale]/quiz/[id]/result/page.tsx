@@ -270,23 +270,23 @@ export default function ResultPage({ params }: ResultPageProps) {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button
                   onClick={() => router.push(`/quiz/${quiz.id}`)}
-                  className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white gap-2 text-lg px-8 py-6 h-auto font-bold border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                  className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white gap-2 font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] dark:shadow-[3px_3px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                 >
-                  <RotateCcw className="w-5 h-5" />
+                  <RotateCcw className="w-4 h-4" />
                   {t('common.retakeQuiz') || '重新测试'}
                 </Button>
                 
                 <Button
                   onClick={() => router.push('/')}
-                  className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white gap-2 text-lg px-8 py-6 h-auto font-bold border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                  className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white gap-2 font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] dark:shadow-[3px_3px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                 >
-                  <Home className="w-5 h-5" />
+                  <Home className="w-4 h-4" />
                   {t('common.browseMore') || '浏览更多测试'}
                 </Button>
 
                 {isUnlocked && (
                   <Button
-                    className={`w-full sm:w-auto bg-gradient-to-r ${getResultColor(result.type)} hover:opacity-90 text-white gap-2 font-black border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all`}
+                    className={`w-full sm:w-auto bg-gradient-to-r ${getResultColor(result.type)} hover:opacity-90 text-white gap-2 font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] dark:shadow-[3px_3px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all`}
                   >
                     <Share2 className="w-4 h-4" />
                     {t('common.shareResult') || '分享结果'}
