@@ -1,4 +1,5 @@
-import { setRequestLocale } from 'next-intl/server';
+import { setRequestLocale, getMessages } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { routing } from '@/src/i18n/routing';
 import { notFound } from 'next/navigation';
@@ -57,10 +58,13 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(safeLocale);
+  const messages = await getMessages();
 
   return (
     <div className={`${geistSans.variable} ${geistMono.variable}`}>
-      {children}
+      <NextIntlClientProvider messages={messages} locale={safeLocale}>
+        {children}
+      </NextIntlClientProvider>
     </div>
   );
 }
