@@ -33,11 +33,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
-  let locale = routing.defaultLocale;
+  let locale: typeof routing.locales[number] = routing.defaultLocale;
   
   const storedLocale = cookieStore.get('NEXT_LOCALE')?.value;
-  if (storedLocale && routing.locales.includes(storedLocale as any)) {
-    locale = storedLocale;
+  if (storedLocale && routing.locales.includes(storedLocale as typeof routing.locales[number])) {
+    locale = storedLocale as typeof routing.locales[number];
   } else {
     const acceptLanguage = cookieStore.get('Accept-Language')?.value || '';
     const browserLocale = acceptLanguage.split(',')[0]?.toLowerCase();
