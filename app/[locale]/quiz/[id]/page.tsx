@@ -43,7 +43,9 @@ export default function QuizPage({ params }: QuizPageProps) {
   const [isCompleted, setIsCompleted] = useState(false);
 
   const getVisibleQuestionIndices = () => {
-    const total = totalQuestions;
+    if (!quiz || !quiz.questions) return [];
+    
+    const total = quiz.questions.length;
     const current = currentQuestionIndex;
     const maxSlots = 15;
     const visible: (number | string)[] = [];
@@ -109,10 +111,11 @@ export default function QuizPage({ params }: QuizPageProps) {
     return null;
   }
 
-  const currentQuestion = quiz.questions[currentQuestionIndex];
   const totalQuestions = quiz.questions.length;
-  const progress = (currentQuestionIndex + 1) / totalQuestions;
-  const selectedAnswer = answers[currentQuestion.id];
+  const safeIndex = Math.min(Math.max(currentQuestionIndex, 0), totalQuestions - 1);
+  const currentQuestion = quiz.questions[safeIndex];
+  const progress = (safeIndex + 1) / totalQuestions;
+  const selectedAnswer = currentQuestion ? answers[currentQuestion.id] : undefined;
 
   const getTranslatedQuestion = (questionIndex: number) => {
     try {
@@ -293,7 +296,7 @@ export default function QuizPage({ params }: QuizPageProps) {
                           className={`flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full text-xs font-bold transition-all duration-200 border border-stone-900 dark:border-stone-600
                             ${index === currentQuestionIndex 
                               ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] dark:shadow-[1px_1px_0px_0px_rgba(120,113,108,1)]' 
-                              : answers[quiz.questions[index].id] 
+                              : quiz.questions[index] && answers[quiz.questions[index].id] 
                                 ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400' 
                                 : 'bg-stone-100 dark:bg-stone-700 text-stone-500 dark:text-stone-400'
                             }`}
