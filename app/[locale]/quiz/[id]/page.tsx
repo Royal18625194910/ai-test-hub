@@ -118,21 +118,21 @@ export default function QuizPage({ params }: QuizPageProps) {
 
   return (
     <div className="min-h-screen bg-amber-50 dark:from-stone-900 dark:to-amber-950">
-      <header className="sticky top-0 z-[60] bg-amber-50/95 dark:bg-stone-900/95 backdrop-blur-sm py-4">
-        <div className="max-w-4xl mx-auto px-4">
+      <header className="sticky top-0 z-[60] bg-amber-50/95 dark:bg-stone-900/95 backdrop-blur-sm py-3 sm:py-4">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4">
           <div className="relative">
             <div className="absolute inset-0 bg-stone-900 dark:bg-black rounded-xl translate-x-1 translate-y-1" />
             <div className="relative bg-white dark:bg-stone-800 border-2 border-stone-900 dark:border-stone-600 rounded-xl">
-              <div className="px-6 py-4 flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-2 text-stone-900 dark:text-stone-100 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  <ArrowLeft className="w-5 h-5" />
-                  <span className="font-bold">{t('common.appName')}</span>
+              <div className="px-3 sm:px-6 py-2 sm:py-4 flex items-center justify-between gap-2">
+                <Link href="/" className="flex items-center gap-1 sm:gap-2 text-stone-900 dark:text-stone-100 hover:text-orange-600 dark:hover:text-orange-400 transition-colors min-w-0">
+                  <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <span className="font-bold text-sm sm:text-base truncate">{t('common.appName')}</span>
                 </Link>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                   <LanguageSwitcher />
-                  <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center border-2 border-stone-900">
-                    <Brain className="w-4 h-4 text-white" />
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center border-2 border-stone-900 flex-shrink-0">
+                    <Brain className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
                   </div>
                 </div>
               </div>

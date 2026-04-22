@@ -1,0 +1,33 @@
+{
+  "jobs": 2,
+  "tasks": [
+    {
+      "id": "personality-test",
+      "prompt": "psychological test concept with colorful personality traits visualization, warm amber and orange colors, artistic illustration style, soft gradients, mind map with different personality types represented as colorful bubbles, professional website hero image, 1:1 square format",
+      "image": "d:/trae-test/ai-test-hub/public/images/personality-test.png",
+      "ar": "1:1",
+      "quality": "2k"
+    },
+    {
+      "id": "brain-thinking",
+      "prompt": "brain thinking concept with neurons and glowing neural connections, creative mind map visualization, warm orange and amber color palette, artistic digital illustration style, brain silhouette with light rays and sparkles, professional website illustration, 1:1 square format",
+      "image": "d:/trae-test/ai-test-hub/public/images/brain-thinking.png",
+      "ar": "1:1",
+      "quality": "2k"
+    },
+    {
+      "id": "emotional-intelligence",
+      "prompt": "emotional intelligence concept with colorful emotions represented as soft organic shapes, warm color palette with amber, orange, and soft reds, flowing gradient shapes representing joy, empathy, connection, artistic abstract illustration, professional website hero image, 1:1 square format",
+      "image": "d:/trae-test/ai-test-hub/public/images/emotional-intelligence.png",
+      "ar": "1:1",
+      "quality": "2k"
+    },
+    {
+      "id": "discovery-journey",
+      "prompt": "self discovery journey concept with winding path and milestones, adventure theme with warm cozy colors, path through abstract landscape representing personal growth, compass and guiding light elements, artistic illustration style, professional website hero image, 1:1 square format",
+      "image": "d:/trae-test/ai-test-hub/public/images/discovery-journey.png",
+      "ar": "1:1",
+      "quality": "2k"
+    }
+  ]
+}
