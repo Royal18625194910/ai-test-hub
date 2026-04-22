@@ -75,12 +75,12 @@ export default function Home() {
                 </Link>
                 
                 <nav className="hidden md:flex items-center gap-8">
-                  <Link href="#quizzes" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                  <a href="#quizzes" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                     {t('sections.popularQuizzes')}
-                  </Link>
-                  <Link href="#features" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                  </a>
+                  <a href="#features" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                     {t('sections.features')}
-                  </Link>
+                  </a>
                 </nav>
 
                 <div className="flex items-center gap-2">
