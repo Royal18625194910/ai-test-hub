@@ -201,55 +201,59 @@ export default function QuizPage({ params }: QuizPageProps) {
         <div className="mt-8">
           <StickerCard delay={0.5}>
             <div className="p-6">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-                <Button
-                  onClick={handlePrevious}
-                  disabled={currentQuestionIndex === 0}
-                  className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white gap-2 font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] dark:shadow-[3px_3px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  {t('common.previous') || '上一题'}
-                </Button>
-
-                <div className="flex items-center gap-2">
-                  {quiz.questions.map((_, index) => (
-                    <motion.button
-                      key={index}
-                      onClick={() => setCurrentQuestionIndex(index)}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`w-8 h-8 rounded-full text-sm font-bold transition-all duration-200 border-2 border-stone-900 dark:border-stone-600
-                        ${index === currentQuestionIndex 
-                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] dark:shadow-[2px_2px_0px_0px_rgba(120,113,108,1)]' 
-                          : answers[quiz.questions[index].id] 
-                            ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400' 
-                            : 'bg-stone-100 dark:bg-stone-700 text-stone-500 dark:text-stone-400'
-                        }`}
-                    >
-                      {index + 1}
-                    </motion.button>
-                  ))}
-                </div>
-
-                {currentQuestionIndex < totalQuestions - 1 ? (
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex items-center justify-between w-full gap-3 order-2 sm:order-1">
                   <Button
-                    onClick={handleNext}
-                    disabled={!selectedAnswer}
+                    onClick={handlePrevious}
+                    disabled={currentQuestionIndex === 0}
                     className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white gap-2 font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] dark:shadow-[3px_3px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                   >
-                    {t('common.next') || '下一题'}
-                    <ChevronRight className="w-4 h-4" />
+                    <ArrowLeft className="w-4 h-4" />
+                    {t('common.previous') || '上一题'}
                   </Button>
-                ) : (
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={!allQuestionsAnswered}
-                    className={`w-full sm:w-auto bg-gradient-to-r ${quiz.color} hover:opacity-90 text-white gap-2 font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] dark:shadow-[3px_3px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all`}
-                  >
-                    {t('common.viewResult') || '查看结果'}
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
-                )}
+
+                  {currentQuestionIndex < totalQuestions - 1 ? (
+                    <Button
+                      onClick={handleNext}
+                      disabled={!selectedAnswer}
+                      className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white gap-2 font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] dark:shadow-[3px_3px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                    >
+                      {t('common.next') || '下一题'}
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleSubmit}
+                      disabled={!allQuestionsAnswered}
+                      className={`w-full sm:w-auto bg-gradient-to-r ${quiz.color} hover:opacity-90 text-white gap-2 font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] dark:shadow-[3px_3px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all`}
+                    >
+                      {t('common.viewResult') || '查看结果'}
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  )}
+                </div>
+
+                <div className="w-full overflow-x-auto order-1 sm:order-2 scrollbar-hide pb-2">
+                  <div className="flex items-center justify-center gap-1.5 sm:gap-2 min-w-max">
+                    {quiz.questions.map((_, index) => (
+                      <motion.button
+                        key={index}
+                        onClick={() => setCurrentQuestionIndex(index)}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 border-2 border-stone-900 dark:border-stone-600
+                          ${index === currentQuestionIndex 
+                            ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] dark:shadow-[2px_2px_0px_0px_rgba(120,113,108,1)]' 
+                            : answers[quiz.questions[index].id] 
+                              ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400' 
+                              : 'bg-stone-100 dark:bg-stone-700 text-stone-500 dark:text-stone-400'
+                          }`}
+                      >
+                        {index + 1}
+                      </motion.button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </StickerCard>
