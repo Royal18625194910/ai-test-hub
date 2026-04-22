@@ -206,6 +206,219 @@
           "description": "You are an enthusiastic, charismatic, and inspiring person. You enjoy social activities and can easily connect with all kinds of people. You are full of energy and creativity, and always see the positive side of things. Your strengths lie in social skills and charisma, but you may sometimes spread yourself too thin or have difficulty focusing."
         }
       }
+    },
+    "mbti-personality": {
+      "title": "MBTI Personality Type Test",
+      "description": "Explore your 16 personality types through 20 classic questions, understand your personality traits, strengths, and suitable development directions.",
+      "category": "Personality Test",
+      "questions": [
+        {
+          "text": "At social gatherings, you usually:",
+          "options": [
+            { "text": "Actively talk to various people and feel energized" },
+            { "text": "Have deep conversations with only a few familiar people, then need time alone to recharge" }
+          ]
+        },
+        {
+          "text": "You tend to:",
+          "options": [
+            { "text": "Focus on concrete facts and details" },
+            { "text": "Imagine overall possibilities and patterns" }
+          ]
+        },
+        {
+          "text": "When making decisions, you value more:",
+          "options": [
+            { "text": "Logical analysis and objective standards" },
+            { "text": "Others' feelings and values" }
+          ]
+        },
+        {
+          "text": "When it comes to plans, you tend to:",
+          "options": [
+            { "text": "Plan ahead and follow the plan" },
+            { "text": "Stay flexible and adapt to changes" }
+          ]
+        },
+        {
+          "text": "On weekends, you would rather:",
+          "options": [
+            { "text": "Gather with friends or attend social activities" },
+            { "text": "Stay at home and enjoy time alone" }
+          ]
+        },
+        {
+          "text": "When processing new information, you:",
+          "options": [
+            { "text": "First focus on known concrete facts" },
+            { "text": "First look for patterns and underlying meanings" }
+          ]
+        },
+        {
+          "text": "In a team, you are more likely to:",
+          "options": [
+            { "text": "Point out errors to ensure quality" },
+            { "text": "Emphasize harmony to maintain morale" }
+          ]
+        },
+        {
+          "text": "Regarding deadlines, you:",
+          "options": [
+            { "text": "Finish ahead of time and dislike procrastination" },
+            { "text": "Work more efficiently under pressure, often rushing at the last minute" }
+          ]
+        },
+        {
+          "text": "You feel that you:",
+          "options": [
+            { "text": "Are easy for others to get to know" },
+            { "text": "Are not easy for others to get to know" }
+          ]
+        },
+        {
+          "text": "You appreciate more:",
+          "options": [
+            { "text": "Practicality and common sense" },
+            { "text": "Imagination and innovation" }
+          ]
+        },
+        {
+          "text": "When criticizing others, you:",
+          "options": [
+            { "text": "Express directly without caring much about their feelings" },
+            { "text": "Consider their feelings and express tactfully" }
+          ]
+        },
+        {
+          "text": "Your work/study style is:",
+          "options": [
+            { "text": "Focus and complete in one go" },
+            { "text": "Work in stages, with other things in between" }
+          ]
+        },
+        {
+          "text": "In a crowd, you:",
+          "options": [
+            { "text": "Feel excited and energized" },
+            { "text": "Feel exhausted and want to leave" }
+          ]
+        },
+        {
+          "text": "You tend to:",
+          "options": [
+            { "text": "Talk about things that actually happened" },
+            { "text": "Talk about ideas and possibilities" }
+          ]
+        },
+        {
+          "text": "When facing conflict, you:",
+          "options": [
+            { "text": "Confront the problem and seek truth" },
+            { "text": "Avoid conflict and seek harmony" }
+          ]
+        },
+        {
+          "text": "You value more:",
+          "options": [
+            { "text": "Certainty and predictability" },
+            { "text": "Flexibility and openness" }
+          ]
+        },
+        {
+          "text": "When calling someone, you:",
+          "options": [
+            { "text": "Don't hesitate, just dial directly" },
+            { "text": "Need to prepare first, or even feel a bit hesitant" }
+          ]
+        },
+        {
+          "text": "Your approach to problems is:",
+          "options": [
+            { "text": "Rely on past experience" },
+            { "text": "Try new methods" }
+          ]
+        },
+        {
+          "text": "In an argument, you are more likely to:",
+          "options": [
+            { "text": "Stick to the correct position" },
+            { "text": "Seek consensus and understanding" }
+          ]
+        },
+        {
+          "text": "For vacation plans, you:",
+          "options": [
+            { "text": "Plan each day in detail in advance" },
+            { "text": "Take it step by step, go with the flow" }
+          ]
+        }
+      ],
+      "results": {
+        "INTJ": {
+          "title": "The Architect (INTJ) - Independent Strategist",
+          "description": "You are imaginative and strategic thinkers, with a plan for everything. You have a unique perspective and strong analytical skills, excelling at seeing the big picture and making long-term plans. You pursue knowledge and self-improvement, and are natural leaders and innovators."
+        },
+        "INTP": {
+          "title": "The Logician (INTP) - Innovative Thinker",
+          "description": "You are innovative inventors with an unquenchable thirst for knowledge. You enjoy analyzing problems and exploring new concepts, pursuing logical perfection. Your thinking is flexible and you can see things from multiple angles, but sometimes may get too absorbed in your own world of ideas."
+        },
+        "ENTJ": {
+          "title": "The Commander (ENTJ) - Decisive Leader",
+          "description": "You are bold, imaginative, and strong-willed leaders, always finding or creating solutions. You have natural organizational and decision-making abilities, excelling at motivating others to pursue common goals. You pursue efficiency and achievement, and are natural strategists."
+        },
+        "ENTP": {
+          "title": "The Debater (ENTP) - Smart Curious Thinker",
+          "description": "You are smart and curious thinkers who cannot resist an intellectual challenge. You enjoy debating and exploring new ideas, with quick thinking and creativity. You excel at discovering possibilities but may lack patience with daily details. Your energy and wit make you excellent problem solvers."
+        },
+        "INFJ": {
+          "title": "The Advocate (INFJ) - Quiet Mystic",
+          "description": "You are quiet and mystical people, yet very inspiring and tireless idealists. You deeply understand others, with strong intuition and insight. You pursue meaning and purpose, excelling at helping others realize their potential, but sometimes may be too idealistic."
+        },
+        "INFP": {
+          "title": "The Mediator (INFP) - Poetic Altruist",
+          "description": "You are poetic, kind altruists, always eager to help a good cause. You have a rich inner world and deep values, pursuing authenticity and self-expression. You are creative and empathetic, but sometimes may be too sensitive or avoid conflict."
+        },
+        "ENFJ": {
+          "title": "The Protagonist (ENFJ) - Charismatic Leader",
+          "description": "You are charismatic and inspiring leaders, able to mesmerize their listeners. You naturally understand others and motivate them to grow, making excellent mentors and team builders. You pursue harmony and helping others, but sometimes may care too much about others while neglecting yourself."
+        },
+        "ENFP": {
+          "title": "The Campaigner (ENFP) - Enthusiastic Creative",
+          "description": "You are enthusiastic, creative, and sociable free spirits, who can always find a reason to smile. You are full of energy and imagination, excelling at discovering possibilities and motivating others. You pursue variety and new experiences, but sometimes may have difficulty focusing or following through."
+        },
+        "ISTJ": {
+          "title": "The Logistician (ISTJ) - Practical Pragmatist",
+          "description": "You are very practical and fact-minded individuals whose reliability cannot be doubted. You value tradition and order, excelling at establishing stable systems and processes. You are the backbone of any team, always completing tasks on time and ensuring quality, but sometimes may be too conservative or resistant to change."
+        },
+        "ISFJ": {
+          "title": "The Defender (ISFJ) - Dedicated Protector",
+          "description": "You are very dedicated and warm protectors, always ready to defend your loved ones. You are reliable and considerate, noticing others' needs and providing support. You value harmony and responsibility, but sometimes may care too much about others while neglecting yourself."
+        },
+        "ESTJ": {
+          "title": "The Executive (ESTJ) - Excellent Manager",
+          "description": "You are excellent administrators, unsurpassed at managing things or people. You have natural organizational and decision-making abilities, excelling at establishing structure and ensuring efficiency. You pursue order and tradition, but sometimes may be too assertive or not flexible enough."
+        },
+        "ESFJ": {
+          "title": "The Consul (ESFJ) - Considerate Caregiver",
+          "description": "You are extraordinarily caring, social, and popular people, always eager to help. You excel at building harmonious relationships, valuing tradition and community. You naturally care for others, but sometimes may be too dependent on others' approval."
+        },
+        "ISTP": {
+          "title": "The Virtuoso (ISTP) - Bold Practitioner",
+          "description": "You are bold and practical experimenters, masters of all kinds of tools. You live in the moment, excelling at solving practical problems and handling unexpected situations. You enjoy hands-on practice and have keen observation of your surroundings, but sometimes may be too impulsive or lack long-term planning."
+        },
+        "ISFP": {
+          "title": "The Adventurer (ISFP) - Flexible Artist",
+          "description": "You are flexible and charming artists, always ready to explore and experience something new. You are sensitive and creative, pursuing authenticity and self-expression. You adapt well to environments, but sometimes may be too passive or have difficulty making decisions."
+        },
+        "ESTP": {
+          "title": "The Entrepreneur (ESTP) - Smart Risk-Taker",
+          "description": "You are smart, energetic, and perceptive people who truly enjoy living on the edge. You excel at seizing opportunities and meeting challenges, with quick thinking and adaptability. You pursue excitement and variety, but sometimes may be too impulsive or ignore consequences."
+        },
+        "ESFP": {
+          "title": "The Entertainer (ESFP) - Spontaneous Performer",
+          "description": "You are spontaneous, energetic entertainers, and life is never boring around you. You are full of energy and charisma, excelling at keeping the mood light and making others happy. You live in the moment, pursuing joy and new experiences, but sometimes may pursue excitement too much without considering the long term."
+        }
+      }
     }
   }
 }

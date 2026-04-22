@@ -42,6 +42,46 @@ export default function QuizPage({ params }: QuizPageProps) {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isCompleted, setIsCompleted] = useState(false);
 
+  const getVisibleQuestionIndices = () => {
+    const total = totalQuestions;
+    const current = currentQuestionIndex;
+    const visible: (number | string)[] = [];
+    
+    const showFirst = true;
+    const showLast = true;
+    const neighbors = 2;
+    
+    if (total <= 10) {
+      for (let i = 0; i < total; i++) {
+        visible.push(i);
+      }
+      return visible;
+    }
+    
+    const start = Math.max(0, current - neighbors);
+    const end = Math.min(total - 1, current + neighbors);
+    
+    if (showFirst && start > 0) {
+      visible.push(0);
+      if (start > 1) {
+        visible.push('ellipsis-start');
+      }
+    }
+    
+    for (let i = start; i <= end; i++) {
+      visible.push(i);
+    }
+    
+    if (showLast && end < total - 1) {
+      if (end < total - 2) {
+        visible.push('ellipsis-end');
+      }
+      visible.push(total - 1);
+    }
+    
+    return visible;
+  };
+
   useEffect(() => {
     if (!quiz) {
       router.push('/');
@@ -235,23 +275,37 @@ export default function QuizPage({ params }: QuizPageProps) {
 
                 <div className="w-full overflow-x-auto order-1 sm:order-2 scrollbar-hide pb-2">
                   <div className="flex items-center justify-center gap-1.5 sm:gap-2 min-w-max">
-                    {quiz.questions.map((_, index) => (
-                      <motion.button
-                        key={index}
-                        onClick={() => setCurrentQuestionIndex(index)}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 border-2 border-stone-900 dark:border-stone-600
-                          ${index === currentQuestionIndex 
-                            ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] dark:shadow-[2px_2px_0px_0px_rgba(120,113,108,1)]' 
-                            : answers[quiz.questions[index].id] 
-                              ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400' 
-                              : 'bg-stone-100 dark:bg-stone-700 text-stone-500 dark:text-stone-400'
-                          }`}
-                      >
-                        {index + 1}
-                      </motion.button>
-                    ))}
+                    {getVisibleQuestionIndices().map((item, displayIndex) => {
+                      if (typeof item === 'string') {
+                        return (
+                          <div 
+                            key={item} 
+                            className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 text-stone-400 dark:text-stone-500 font-bold"
+                          >
+                            ...
+                          </div>
+                        );
+                      }
+                      
+                      const index = item as number;
+                      return (
+                        <motion.button
+                          key={index}
+                          onClick={() => setCurrentQuestionIndex(index)}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                          className={`flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 border-2 border-stone-900 dark:border-stone-600
+                            ${index === currentQuestionIndex 
+                              ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] dark:shadow-[2px_2px_0px_0px_rgba(120,113,108,1)]' 
+                              : answers[quiz.questions[index].id] 
+                                ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400' 
+                                : 'bg-stone-100 dark:bg-stone-700 text-stone-500 dark:text-stone-400'
+                            }`}
+                        >
+                          {index + 1}
+                        </motion.button>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
