@@ -3,7 +3,7 @@
 import { useEffect, useState, use } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/src/i18n/routing';
+import Link from 'next/link';
 import { useAuth, useUser } from '@clerk/nextjs';
 import { getQuizById } from '@/data/quizzes';
 import { Button } from '@/components/ui/button';

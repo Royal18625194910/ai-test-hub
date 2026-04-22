@@ -1,7 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Link } from '@/src/i18n/routing';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { quizzes } from '@/data/quizzes';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -134,10 +135,10 @@ export default function Home() {
                     className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-8 py-6 h-auto font-bold border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                     asChild
                   >
-                    <Link href="#quizzes" className="gap-2">
+                    <a href="#quizzes" className="flex items-center justify-center gap-2">
                       {t('common.startQuiz')}
                       <ArrowRight className="w-5 h-5" />
-                    </Link>
+                    </a>
                   </Button>
                 </div>
 
@@ -273,14 +274,15 @@ export default function Home() {
                         </div>
                       </CardContent>
                       <CardFooter>
-                        <Link href={`/quiz/${quiz.id}`} className="w-full">
-                          <Button 
-                            className={`w-full bg-gradient-to-r ${quiz.color} hover:opacity-90 text-white font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all`}
-                          >
+                        <Button 
+                          className={`w-full bg-gradient-to-r ${quiz.color} hover:opacity-90 text-white font-bold border-2 border-stone-900 dark:border-stone-600 rounded-xl shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] dark:shadow-[3px_3px_0px_0px_rgba(120,113,108,1)] hover:shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all`}
+                          asChild
+                        >
+                          <Link href={`/quiz/${quiz.id}`} className="w-full">
                             {t('common.startQuiz')}
                             <ChevronRight className="w-4 h-4 ml-1" />
-                          </Button>
-                        </Link>
+                          </Link>
+                        </Button>
                       </CardFooter>
                     </Card>
                   </StickerCard>
@@ -402,13 +404,13 @@ export default function Home() {
                     {t('cta.description')}
                   </p>
                   <Button 
-                    className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-10 py-6 h-auto font-black border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                    className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-10 py-6 h-auto font-black border-2 border-stone-900 dark:border-stone-600 rounded-2xl shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] dark:shadow-[4px_4px_0px_0px_rgba(120,113,108,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                     asChild
                   >
-                    <Link href="#quizzes" className="gap-2">
+                    <a href="#quizzes" className="flex items-center justify-center gap-2">
                       {t('cta.button')}
                       <ArrowRight className="w-5 h-5" />
-                    </Link>
+                    </a>
                   </Button>
                 </div>
               </div>
