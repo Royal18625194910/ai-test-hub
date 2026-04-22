@@ -59,43 +59,44 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-amber-50 dark:from-stone-900 dark:to-amber-950">
-      <header className="sticky top-0 z-[60] bg-amber-50/95 dark:bg-stone-900/95 backdrop-blur-sm py-4">
-        <div className="max-w-6xl mx-auto px-4">
+      <header className="sticky top-0 z-[60] bg-amber-50/95 dark:bg-stone-900/95 backdrop-blur-sm py-3 sm:py-4">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4">
           <div className="relative">
             <div className="absolute inset-0 bg-stone-900 dark:bg-black rounded-xl translate-x-1 translate-y-1" />
             <div className="relative bg-white dark:bg-stone-800 border-2 border-stone-900 dark:border-stone-600 rounded-xl">
-              <div className="px-6 py-4 flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center border-2 border-stone-900">
-                    <Brain className="w-6 h-6 text-white" />
+              <div className="px-3 sm:px-6 py-2 sm:py-4 flex items-center justify-between gap-2">
+                <Link href="/" className="flex items-center gap-2 min-w-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center border-2 border-stone-900 flex-shrink-0">
+                    <Brain className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                   </div>
-                  <span className="text-xl font-black text-stone-900 dark:text-stone-100 tracking-tight">
+                  <span className="text-sm sm:text-xl font-black text-stone-900 dark:text-stone-100 tracking-tight truncate hidden xs:block">
                     {t('common.appName')}
                   </span>
                 </Link>
                 
-                <nav className="hidden md:flex items-center gap-8">
-                  <a href="#quizzes" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+                  <a href="#quizzes" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm lg:text-base">
                     {t('sections.popularQuizzes')}
                   </a>
-                  <a href="#features" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                  <a href="#features" className="font-semibold text-stone-700 dark:text-stone-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm lg:text-base">
                     {t('sections.features')}
                   </a>
                 </nav>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                   <ClerkLoaded>
                     {!isSignedIn ? (
                       <SignInButton mode="modal">
-                        <button className="font-bold text-stone-900 dark:text-stone-100 hover:text-orange-600 dark:hover:text-orange-400 transition-colors px-3 py-2">
-                          {t('common.signIn')}
+                        <button className="font-bold text-stone-900 dark:text-stone-100 hover:text-orange-600 dark:hover:text-orange-400 transition-colors px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm">
+                          <span className="hidden sm:inline">{t('common.signIn')}</span>
+                          <span className="sm:hidden">登录</span>
                         </button>
                       </SignInButton>
                     ) : (
                       <UserButton 
                         appearance={{
                           elements: {
-                            avatarBox: 'w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 border-2 border-stone-900',
+                            avatarBox: 'w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 border-2 border-stone-900',
                           }
                         }}
                       />
@@ -164,7 +165,7 @@ export default function Home() {
                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                   >
                     <Image
-                      src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=psychological%20test%20concept%20with%20colorful%20personality%20traits%20visualization%2C%20warm%20colors%2C%20artistic%20style&image_size=square_hd"
+                      src="/images/personality-test.png"
                       alt="性格测试"
                       fill
                       className="object-cover"
@@ -177,7 +178,7 @@ export default function Home() {
                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                   >
                     <Image
-                      src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=brain%20thinking%20concept%20with%20neurons%20and%20connections%2C%20creative%20mind%20map%2C%20warm%20orange%20tones&image_size=square_hd"
+                      src="/images/brain-thinking.png"
                       alt="思维探索"
                       fill
                       className="object-cover"
@@ -190,7 +191,7 @@ export default function Home() {
                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                   >
                     <Image
-                      src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=emotional%20intelligence%20concept%20with%20colorful%20emotions%20represented%20as%20soft%20shapes%2C%20warm%20palette&image_size=square_hd"
+                      src="/images/emotional-intelligence.png"
                       alt="情感探索"
                       fill
                       className="object-cover"
@@ -203,7 +204,7 @@ export default function Home() {
                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                   >
                     <Image
-                      src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=discovery%20journey%20concept%20with%20path%20and%20milestones%2C%20adventure%20theme%2C%20warm%20cozy%20colors&image_size=square_hd"
+                      src="/images/discovery-journey.png"
                       alt="自我发现"
                       fill
                       className="object-cover"
