@@ -64,7 +64,10 @@ export default function QuizPage({ params }: QuizPageProps) {
     const rightStart = current + 1;
     const rightEnd = Math.min(total - 2, current + neighborSlots);
     
-    visible.push(0);
+    // 添加 0，只有当 current 不是 0 时才添加
+    if (current !== 0) {
+      visible.push(0);
+    }
     
     if (leftStart > 1) {
       visible.push('ellipsis-start');
@@ -88,7 +91,10 @@ export default function QuizPage({ params }: QuizPageProps) {
       visible.push('ellipsis-end');
     }
     
-    visible.push(total - 1);
+    // 添加 total - 1，只有当 current 不是 total - 1 时才添加
+    if (current !== total - 1) {
+      visible.push(total - 1);
+    }
     
     return visible;
   };
