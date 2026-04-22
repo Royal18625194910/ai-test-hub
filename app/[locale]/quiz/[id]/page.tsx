@@ -286,7 +286,7 @@ export default function QuizPage({ params }: QuizPageProps) {
                           whileTap={{ scale: 0.95 }}
                           className={`flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full text-xs font-bold transition-all duration-200 border border-stone-900 dark:border-stone-600
                             ${index === currentQuestionIndex 
-                              ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] dark:shadow-[1px_1px_0px_0px_rgba(120,113,108,1)] 
+                              ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[1px_1px_0px_0px_rgba(28,25,23,1)] dark:shadow-[1px_1px_0px_0px_rgba(120,113,108,1)]' 
                               : answers[quiz.questions[index].id] 
                                 ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400' 
                                 : 'bg-stone-100 dark:bg-stone-700 text-stone-500 dark:text-stone-400'
