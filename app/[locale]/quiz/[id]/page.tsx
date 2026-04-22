@@ -144,9 +144,6 @@ export default function QuizPage({ params }: QuizPageProps) {
       <main className="max-w-4xl mx-auto px-4 py-8">
         <StickerCard delay={0.2} className="mb-8">
           <div className="p-6 text-center">
-            <Badge variant="secondary" className="mb-4 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
-              {t(`quizzes.${quiz.id}.category`)}
-            </Badge>
             <h1 className="text-2xl md:text-3xl font-black text-stone-900 dark:text-stone-100 mb-2">
               {t(`quizzes.${quiz.id}.title`)}
             </h1>

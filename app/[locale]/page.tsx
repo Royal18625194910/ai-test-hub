@@ -83,10 +83,6 @@ export default function Home() {
                 </nav>
 
                 <div className="flex items-center gap-2">
-                  <Badge variant="secondary" className="hidden sm:flex items-center gap-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
-                    <Sparkles className="w-3 h-3" />
-                    {t('common.featured')}
-                  </Badge>
                   <ClerkLoaded>
                     {!isSignedIn ? (
                       <SignInButton mode="modal">

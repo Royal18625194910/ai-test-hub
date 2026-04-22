@@ -52,18 +52,7 @@ export function LanguageSwitcher() {
     setIsOpen(false);
     
     if (typeof window !== 'undefined') {
-      const currentPath = window.location.pathname;
-      const segments = currentPath.split('/');
-      
-      if (segments.length > 1 && routing.locales.includes(segments[1] as any)) {
-        segments[1] = newLocale;
-      } else {
-        segments.splice(1, 0, newLocale);
-      }
-      
-      const newPath = segments.join('/') || `/${newLocale}`;
-      const searchParams = window.location.search;
-      window.location.href = newPath + searchParams;
+      window.location.reload();
     }
   };
 

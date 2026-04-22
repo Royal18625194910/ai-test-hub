@@ -24,29 +24,10 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
-
-export async function generateMetadata({ params }: { params: Promise<{ locale?: string }> }) {
-  const { locale } = await params;
-  const safeLocale = locale || routing.defaultLocale;
-  
-  const titles: Record<string, string> = {
-    'zh-CN': '测试题集合 Hub - 发现真实的自己',
-    'zh-TW': '測試題集合 Hub - 發現真實的自己',
-    'en': 'Quiz Hub - Discover Your True Self',
-  };
-  
-  const descriptions: Record<string, string> = {
-    'zh-CN': '通过精心设计的心理测试，深入了解你的性格特质、行为模式和潜在优势。',
-    'zh-TW': '通過精心設計的心理測試，深入了解你的性格特質、行為模式和潛在優勢。',
-    'en': 'Through carefully designed psychological tests, gain deep insights into your personality traits, behavioral patterns, and potential strengths.',
-  };
-
+export async function generateMetadata() {
   return {
-    title: titles[safeLocale] || titles['zh-CN'],
-    description: descriptions[safeLocale] || descriptions['zh-CN'],
+    title: '测试题集合 Hub - 发现真实的自己',
+    description: '通过精心设计的心理测试，深入了解你的性格特质、行为模式和潜在优势。',
     keywords: ['心理测试', '性格测试', '趣味测试', '自我探索', 'MBTI', '人格测试'],
     authors: [{ name: '测试题集合 Hub' }],
   };
