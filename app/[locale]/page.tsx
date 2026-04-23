@@ -19,10 +19,10 @@ const StickerCard = ({ children, className = '', delay = 0 }: { children: React.
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay, duration: 0.5 }}
-    className={`relative ${className}`}
+    className={`relative h-full ${className}`}
   >
     <div className="absolute inset-0 bg-stone-900 dark:bg-black rounded-xl translate-x-1 translate-y-1" />
-    <div className="relative bg-white dark:bg-stone-800 border-2 border-stone-900 dark:border-stone-600 rounded-xl">
+    <div className="relative bg-white dark:bg-stone-800 border-2 border-stone-900 dark:border-stone-600 rounded-xl h-full flex flex-col">
       {children}
     </div>
   </motion.div>
@@ -236,10 +236,11 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {quizzes.map((quiz, index) => (
-              <BlurFade key={quiz.id} delay={0.5 + index * 0.1} inView>
+              <BlurFade key={quiz.id} delay={0.5 + index * 0.1} inView className="h-full">
                 <motion.div
                   whileHover={{ y: -8 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="h-full"
                 >
                   <StickerCard delay={0.5 + index * 0.1}>
                     <Card className="border-0 bg-transparent overflow-hidden h-full flex flex-col">
